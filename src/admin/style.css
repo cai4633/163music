@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.view {
+  text-align: center;
+}
+.view .upload {
+  margin-bottom: 20px;
+}
+.view .upload #chooseFiles {
+  display: inline-block;
+  vertical-align: bottom;
+  border: 2px dashed #a29595;
+  width: 300px;
+  height: 150px;
+  border-radius: 20px;
+  outline: none;
+}
+.view .upload .text {
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 12px;
+  width: 10em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.view .upload #submit {
+  display: inline-block;
+  border: 1px solid #999;
+  padding: 2px;
+}

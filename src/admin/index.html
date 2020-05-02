@@ -1,0 +1,23 @@
+<!DOCTYPE html lang ='zh-hans'>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网易云音乐</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="view">
+      <div class="upload">
+        <input type="file" id="uploadInput" hidden multiple />
+        <button id="chooseFiles">选择文件</button>
+        <span class="text">请选择文件...</span>
+        <button id="submit">上传</button>
+      </div>
+      <audio src="http://lc-T3IwpOc7.cn-e1.lcfile.com/c11c4f66d96816c536e6/%E7%AC%AC%E4%B8%80%E6%AC%A1-%E5%85%89%E8%89%AF.mp3" controls preload="" ></audio>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.js"></script>
+    <script src="../../node_modules/leancloud-storage/dist/av-min.js"></script>
+    <script src="./main.js"> </script>
+  </body>
+</html>
