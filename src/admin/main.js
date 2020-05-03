@@ -4,6 +4,7 @@ $(document).ready(() => {
   }
 
   let controller = {
+    files: [],
     init() {
       AV.init({
         appId: "T3IwpOc7xgWfCpseFzJEbTpy-9Nh9j0Va",
@@ -32,12 +33,8 @@ $(document).ready(() => {
 
       $("#uploadInput").on("change", (e) => {
         const avatarUpload = document.getElementById("uploadInput")
-        let fileName = ""
-        let length = avatarUpload.files.length
-        if (length) {
-          fileName = `已选择${length}个文件`
-        }
-        let description = fileName ? fileName : "请选择文件..."
+        this.files = Array.from(avatarUpload.files)
+        let description = this.files.length ? `已选择${this.files.length}个文件` : "请选择文件..."
         $(".text").text(description)
       })
       return this
@@ -46,16 +43,15 @@ $(document).ready(() => {
     upload() {
       //多文件上传
       $("#submit").on("click", () => {
-        const avatarUpload = document.getElementById("uploadInput")
         let count = 0
-        if (avatarUpload.files.length) {
-          for (let i = 0; i < avatarUpload.files.length; i++) {
-            let localFile = avatarUpload.files[i]
+        if (this.files.length) {
+          for (let i = 0; i < this.files.length; i++) {
+            let localFile = this.files[i]
             let file = new AV.File(localFile.name, localFile)
             $(".text").text("上传进行中...")
             file.save().then((file) => {
               count++
-              if (count === avatarUpload.files.length) {
+              if (count === this.files.length) {
                 $(".text").text("上传完成！")
               }
             })
@@ -64,6 +60,16 @@ $(document).ready(() => {
       })
       return this
     },
+
+    drop(){
+      $('#chooseFiles').on('drop',(e)=>{
+        e.preventDefault()
+        this.files = [].concat(Array.from(e.originalEvent.dataTransfer.files))
+        let description = this.files.length ? `已选择${this.files.length}个文件` : "请选择文件..."
+        $(".text").text(description)
+      })
+      return this
+    }
   }
 
   controller
@@ -71,4 +77,9 @@ $(document).ready(() => {
     .chooseFiles()
     .upload()
     .createClass("Songs", { name: "test", singer: "test", description: "hello World!", cover: "" })
+    .drop()
+})
+
+$(document).on('drop dragover', (e)=>{
+  e.preventDefault()
 })
