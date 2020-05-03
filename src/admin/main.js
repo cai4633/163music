@@ -1,8 +1,4 @@
 $(document).ready(() => {
-  let view = {
-    view: document.querySelector("view"),
-  }
-
   let controller = {
     files: [],
     init() {
@@ -25,61 +21,12 @@ $(document).ready(() => {
       })
       return this
     },
-
-    chooseFiles() {
-      $("#chooseFiles").on("click", (e) => {
-        $("#uploadInput").click()
-      })
-
-      $("#uploadInput").on("change", (e) => {
-        const avatarUpload = document.getElementById("uploadInput")
-        this.files = Array.from(avatarUpload.files)
-        let description = this.files.length ? `已选择${this.files.length}个文件` : "请选择文件..."
-        $(".text").text(description)
-      })
-      return this
-    },
-
-    upload() {
-      //多文件上传
-      $("#submit").on("click", () => {
-        let count = 0
-        if (this.files.length) {
-          for (let i = 0; i < this.files.length; i++) {
-            let localFile = this.files[i]
-            let file = new AV.File(localFile.name, localFile)
-            $(".text").text("上传进行中...")
-            file.save().then((file) => {
-              count++
-              if (count === this.files.length) {
-                $(".text").text(`上传完成！文件名：${file.attributes.name}。 外链：${file.attributes.url}`)
-              }
-            })
-          }
-        }
-      })
-      return this
-    },
-
-    drop(){
-      $('#chooseFiles').on('drop',(e)=>{
-        e.preventDefault()
-        this.files = [].concat(Array.from(e.originalEvent.dataTransfer.files))
-        let description = this.files.length ? `已选择${this.files.length}个文件` : "请选择文件..."
-        $(".text").text(description)
-      })
-      return this
-    }
   }
 
-  controller
-    .init()
-    .chooseFiles()
-    .upload()
-    // .createClass("Songs", { name: "test", singer: "test", description: "hello World!", cover: "" })
-    .drop()
+  controller.init()
+  // .createClass("Songs", { name: "test", singer: "test", description: "hello World!", cover: "" })
 })
 
-$(document).on('drop dragover', (e)=>{
+$(document).on("drop dragover", (e) => {
   e.preventDefault()
 })

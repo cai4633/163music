@@ -44,6 +44,9 @@ body .view aside .newSong ul li::before {
   border-bottom: 1px solid #d4d4d4;
   margin-bottom: 5px;
 }
+body .view aside .upload {
+  cursor: pointer;
+}
 body .view aside .upload #chooseFiles {
   display: inline-flex;
   text-align: center;
