@@ -21,7 +21,7 @@ $(document).ready(() => {
         testObject.set(key, obj[key])
       }
       testObject.save().then((object) => {
-        console.log("保存成功。")
+        console.log("保存成功")
       })
       return this
     },
@@ -52,7 +52,7 @@ $(document).ready(() => {
             file.save().then((file) => {
               count++
               if (count === this.files.length) {
-                $(".text").text("上传完成！")
+                $(".text").text(`上传完成！文件名：${file.attributes.name}。 外链：${file.attributes.url}`)
               }
             })
           }
@@ -76,7 +76,7 @@ $(document).ready(() => {
     .init()
     .chooseFiles()
     .upload()
-    .createClass("Songs", { name: "test", singer: "test", description: "hello World!", cover: "" })
+    // .createClass("Songs", { name: "test", singer: "test", description: "hello World!", cover: "" })
     .drop()
 })
 

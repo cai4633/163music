@@ -8,13 +8,50 @@
   </head>
   <body>
     <div class="view">
-      <div class="upload">
-        <input type="file" id="uploadInput" hidden multiple />
-        <button id="chooseFiles">选择文件</button>
-        <span class="text">请选择文件...</span>
-        <button id="submit">上传</button>
-      </div>
-      <audio src="http://lc-T3IwpOc7.cn-e1.lcfile.com/c11c4f66d96816c536e6/%E7%AC%AC%E4%B8%80%E6%AC%A1-%E5%85%89%E8%89%AF.mp3" controls preload="" ></audio>
+      <aside>
+        <div class="newSong">
+          <h1>新建歌曲</h1>
+          <ul>
+            <li>歌曲1</li>
+            <li class="">歌曲2</li>
+            <li>歌曲3</li>
+            <li>歌曲4</li>
+            <li>歌曲5</li>
+            <li>歌曲6</li>
+            <li>歌曲7</li>
+            <li class="">歌曲8</li>
+            <li>歌曲9</li>
+            <li class="active">歌曲10</li>
+          </ul>
+        </div>
+        <div class="upload">
+          <input type="file" id="uploadInput" hidden multiple />
+          <div id="chooseFiles">
+            <p>点击或者拖拽文件</p>
+            <p>文件大小不超过10M</p>
+          </div>
+          <button id="submit">上传</button>
+          <span class="text">请选择文件...</span>
+        </div>
+      </aside>
+      <main>
+        <h1>新建歌曲</h1>
+        <form action="">
+          <div class="row">
+            <label for="song-name">歌名</label><input id="song-name" type="text">
+          </div>
+          <div class="row">
+            <label for="singer">歌手</label><input id="singer" type="text">
+          </div>
+          <div class="row">
+            <label for="song-url">外链</label><input id="song-url" type="text">
+          </div>
+          <div class="row">
+            <input type="submit" value="提交">
+          </div>
+        </form>
+      </main>
+ 
     </div>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.js"></script>
     <script src="../../node_modules/leancloud-storage/dist/av-min.js"></script>
