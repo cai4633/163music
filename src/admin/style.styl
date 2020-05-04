@@ -15,7 +15,6 @@ body
       flex-direction column
 
       .newSong
-        // border 1px solid #000
         flex 1
 
         h1
@@ -23,6 +22,8 @@ body
           text-align center
           padding 5px 10px
           border-bottom 2px solid #d4d4d4
+          &.active
+            background-color #d4d4d4
 
         ul li
           padding 0px 10px 5px 10px
@@ -65,11 +66,13 @@ body
           font-size 12px
           text-overflow ellipsis
           white-space nowrap
+          margin-bottom 15px
 
         #submit
           display inline-block
           border 1px solid #999
           padding 2px
+          margin-right 10px
 
     main
       flex 1

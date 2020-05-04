@@ -14,16 +14,16 @@
       $(this.el).html(this.template)
     },
   }
+
   let model = {}
+
   let controller = {
     init(view, model) {
-      this.view = view
-      this.model = model
+      Object.assign(this, { view, model })
       this.view.render(this.model.data)
-      this.drop().upload().chooseFiles()
+      this.bindEvents()
     },
-
-    chooseFiles() {
+    bindEvents() {
       $("#chooseFiles").on("click", (e) => {
         $("#uploadInput").click()
       })
@@ -32,38 +32,37 @@
         let description = this.files.length ? `已选择${this.files.length}个文件` : "请选择文件..."
         $(".text").text(description)
       })
-      return this
-    },
-
-    drop() {
       $("#chooseFiles").on("drop", (e) => {
         e.preventDefault()
         this.files = [].concat(Array.from(e.originalEvent.dataTransfer.files))
         let description = this.files.length ? `已选择${this.files.length}个文件` : "请选择文件..."
         $(".text").text(description)
       })
-      return this
-    },
-
-    upload() {
       //多文件上传
       $("#submit").on("click", () => {
-        let count = 0
-        if (this.files.length) {
-          for (let i = 0; i < this.files.length; i++) {
-            let file = new AV.File(this.files[i].name, this.files[i])
-            $(".text").text("上传进行中...")
-            file.save().then((file) => {
-              count++
-              if (count === this.files.length) {
-                $(".text").text(`上传完成！文件名：${file.attributes.name}。 外链：${file.attributes.url}`)
-              }
-            })
-          }
-        }
+        this.upload()
       })
-      return this
+    },
+    upload() {
+      let count = 0
+      if (this.files.length) {
+        for (let i = 0; i < this.files.length; i++) {
+          let file = new AV.File(this.files[i].name, this.files[i])
+          $(".text").text("上传进行中...")
+          file.save().then(({ attributes: { url, name } }) => {
+            window.eventHub.emit("getSongInfo", {
+              "song_url": url,
+              "song_name": name,
+            })
+            count++
+            if (count === this.files.length) {
+              $(".text").text(`上传完成！`)
+            }
+          })
+        }
+      }
     },
   }
+
   controller.init(view, model)
 }

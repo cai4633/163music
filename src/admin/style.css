@@ -23,6 +23,9 @@ body .view aside .newSong h1 {
   padding: 5px 10px;
   border-bottom: 2px solid #d4d4d4;
 }
+body .view aside .newSong h1.active {
+  background-color: #d4d4d4;
+}
 body .view aside .newSong ul li {
   padding: 0px 10px 5px 10px;
 }
@@ -68,11 +71,13 @@ body .view aside .upload .text {
   font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-bottom: 15px;
 }
 body .view aside .upload #submit {
   display: inline-block;
   border: 1px solid #999;
   padding: 2px;
+  margin-right: 10px;
 }
 body .view main {
   flex: 1;

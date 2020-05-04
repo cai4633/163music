@@ -2,31 +2,30 @@
   let view = {
     el: ".newSong",
     template: `
-    <h1>新建歌曲</h1>
-    <ul>
-      <li>歌曲1</li>
-      <li class="">歌曲2</li>
-      <li>歌曲3</li>
-      <li>歌曲4</li>
-      <li>歌曲5</li>
-      <li>歌曲6</li>
-      <li>歌曲7</li>
-      <li class="">歌曲8</li>
-      <li>歌曲9</li>
-      <li class="active">歌曲10</li>
-    </ul>
+    <h1 class='new'>新建歌曲</h1>
+    <ul></ul>
     `,
-    render(data) {
+    render(data = { songs: [] }) {
+      let { songs } = data
+      let domLis = songs.map((song) => $("<li>").text(song["song_name"]))
       $(this.el).html(this.template)
+      domLis.map((li) => $(this.el).find("ul").append(li))
     },
   }
-  let model = {}
+
+  let model = { data: { songs: [] }, }
+
   let controller = {
     init(view, model) {
-      this.view = view
-      this.model = model
+      Object.assign(this, { view, model })
       this.view.render(this.model.data)
+      window.eventHub.on("getSongInfo", () => { this.active() })
+      window.eventHub.on("saveSong", (data) => {
+        this.model.data.songs.push(data)
+        this.view.render(this.model.data)
+      })
     },
+    active() { $(".new").addClass("active") },
   }
 
   controller.init(view, model)
