@@ -1,4 +1,4 @@
-$(document).ready(() => {
+{
   let controller = {
     files: [],
     init() {
@@ -10,8 +10,7 @@ $(document).ready(() => {
       this.bindEvents()
     },
 
-
-    bindEvents(){
+    bindEvents() {
       $(document).on("drop dragover", (e) => {
         e.preventDefault()
       })
@@ -19,6 +18,4 @@ $(document).ready(() => {
   }
 
   controller.init()
-})
-
-
+}

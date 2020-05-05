@@ -23,21 +23,40 @@
   `,
     render(data = {}) {
       let [placeholder, html] = [["song_name", "singer", "song_url"], this.template]
-      placeholder.forEach((str) => html = html.replace(`__${str}__`, data[str] || "") )
+      placeholder.forEach((str) => (html = html.replace(`__${str}__`, data[str] || "")))
+      if (data.id) {
+        html = html.replace("新建歌曲", "编辑歌曲")
+      }
       $(this.el).html(html)
     },
-    reset() { this.render({}) },
+    reset() {
+      this.render({})
+    },
   }
 
   let model = {
+    data: {},
     createClass(className, obj) {
       const TestObject = AV.Object.extend(className)
       const testObject = new TestObject()
-      for (key in obj) { testObject.set(key, obj[key]) }
+      for (key in obj) {
+        testObject.set(key, obj[key])
+      }
       return testObject.save().then(
-        (object) => { console.log("保存成功") },
-        (err) => { console.log(err) }
+        (object) => {
+          Object.assign(this.data, {id: object.id})
+        },
+        (err) => {
+          console.log(err)
+        }
       )
+    },
+    update(id,obj) {
+      const song = AV.Object.createWithoutData("Song", id)
+      let str = ["song_name", "song_url", "singer"]
+      str.forEach((key)=>{ song.set(key,obj[key]) })
+      return song.save().then(()=>{
+      })
     },
   }
 
@@ -47,15 +66,36 @@
       this.view.init()
       this.view.render(this.model.data)
       this.bindEvents()
-      window.eventHub.on("getSongInfo", (data) => { this.view.render(data) })
     },
     bindEvents() {
       this.view.$el.on("submit", "form", (e) => {
         e.preventDefault()
-        let [ids, data] = [["song_name", "song_url", "singer"], {}]
-        ids.forEach((id) => { data[id] = $(`#${id}`).val() })
-        this.model.createClass("Songs", data).then(() => { this.view.reset() })
-        window.eventHub.emit("saveSong", data)
+        let [strs, data] = [["song_name", "song_url", "singer"], {}]
+        strs.forEach((str) => {
+          data[str] = $(`#${str}`).val()
+        })
+        Object.assign(this.model.data, data)
+        if (this.model.data.id) {
+          // 更新
+          this.model.update(this.model.data.id, this.model.data).then(()=>{
+            window.eventHub.emit("update", JSON.parse(JSON.stringify(this.model.data)))
+          })
+        } else {
+          //新建
+          this.model.createClass("Song", data).then(() => {
+            this.view.reset()
+            window.eventHub.emit("new", this.model.data)
+          })
+          
+        }
+      })
+      window.eventHub.on("getSongInfo", (data) => {
+        this.model.data = data
+        this.view.render(this.model.data)
+      })
+      window.eventHub.on("selected", (data) => {
+        this.model.data = data
+        this.view.render(this.model.data)
       })
     },
   }
