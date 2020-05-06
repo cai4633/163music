@@ -1,0 +1,132 @@
+header
+  color #333
+  background-color rgb(212, 60, 51)
+  padding 24px 10px
+
+  .logo
+    float left
+    margin-top 5px
+
+    svg
+      font-size 16px
+      line-height 2.25
+      vertical-align middle
+      width 142px
+      height 25px
+
+  .download
+    float right
+    text-align center
+
+    span
+      color #da5a53
+      display block
+      background-color #fff
+      border-radius 20px
+      font-size 16px
+      line-height 2.25
+      width 100px
+
+nav
+  ul
+    display flex
+    flex-wrap nowrap
+    text-align center
+    font-size 15px
+    border-bottom 1px solid rgba(214, 214, 200, 0.4)
+
+    li
+      flex 1
+      width 30%
+
+      a
+        padding 0 5px
+        display inline-block
+        position relative
+
+        &.active
+          color #e01830
+
+          &::after
+            position absolute
+            left 0
+            bottom -1px
+            content ''
+            display inline-block
+            width 100%
+            height 3px
+            background-color #e01830
+
+        span
+          display inline-block
+          line-height 2.67
+
+section.recommendSong
+  padding 20px 0
+  h1
+    padding-left 9px
+    font-size 17px
+    margin-bottom 14px
+    font-weight normal
+  ul
+    display flex
+    flex-wrap wrap
+    li
+      flex 1 1 30%
+      padding 1px
+      box-sizing border-box
+      vertical-align top
+      margin-bottom 16px
+      img
+        vertical-align top
+
+      p
+        padding 6px 2px 0 6px
+        text-align left
+        font-size 13px
+
+.latest
+  h1        
+    font-weight normal
+    font-size 17px
+    margin-bottom 14px
+    padding-left 9px
+    line-height 1
+    border-left 2px solid red
+  ul
+    padding 0 10px 
+    li 
+      text-align left
+      display flex
+      border-bottom 1px  solid rgba(214, 214, 200, 0.4)
+    .left
+      flex 1
+      padding 6px 0
+      h2
+        font-weight normal
+        font-size 17px
+        line-height 1.46
+        white-space nowrap
+        text-overflow ellipsis
+        overflow hidden
+        width 15em
+      .text 
+        line-height 1.48
+        span 
+         font-size  12px
+        span.details
+          margin-left 4px
+          color #888
+
+    .right  
+      color red
+      flex 0 0 auto
+      display flex
+      justify-content center
+      align-items center
+      margin-left 10px
+      .play svg
+           fill #aaaaaa
+           width 22px
+           height 22px
+           vertical-align middle
