@@ -19,7 +19,7 @@
           alt=""
           width="100%"
         />
-        <p class="descrition">{{descrition}</p>
+        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
       </li>
       <li>
         <img
@@ -27,7 +27,7 @@
           alt=""
           width="100%"
         />
-        <p class="descrition">{{descrition}</p>
+        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
       </li>
       <li>
         <img
@@ -35,7 +35,7 @@
           alt=""
           width="100%"
         />
-        <p class="descrition">{{descrition}</p>
+        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
       </li>
       <li>
         <img
@@ -43,7 +43,7 @@
           alt=""
           width="100%"
         />
-        <p class="descrition">{{descrition}</p>
+        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
       </li>
       <li>
         <img
@@ -51,7 +51,7 @@
           alt=""
           width="100%"
         />
-        <p class="descrition">{{descrition}</p>
+        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
       </li>
     </ul>
   

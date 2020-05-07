@@ -1,10 +1,15 @@
 body {
   width: 100vw;
+  height: 100vh;
 }
 body header {
   color: #333;
   background-color: #d43c33;
   padding: 24px 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
 }
 body header .logo {
   float: left;
@@ -19,6 +24,7 @@ body header .logo svg {
 }
 body header .download {
   float: right;
+  padding-right: 20px;
   text-align: center;
 }
 body header .download span {
@@ -29,6 +35,13 @@ body header .download span {
   font-size: 16px;
   line-height: 2.25;
   width: 100px;
+}
+body nav {
+  background-color: #fff;
+  position: fixed;
+  width: 100vw;
+  top: 84px;
+  left: 0;
 }
 body nav ul {
   display: flex;
@@ -64,41 +77,44 @@ body nav ul li a span {
   display: inline-block;
   line-height: 2.67;
 }
-body .page-1 {
+body .tab-content {
+  margin-top: 124px;
+}
+body .tab-content .page-1 {
   display: none;
 }
-body .page-1.active {
+body .tab-content .page-1.active {
   display: block;
 }
-body .page-1 section.recommendSong {
+body .tab-content .page-1 section.recommendSong {
   padding: 20px 0;
 }
-body .page-1 section.recommendSong h1 {
+body .tab-content .page-1 section.recommendSong h1 {
   padding-left: 9px;
   font-size: 17px;
   margin-bottom: 14px;
   font-weight: normal;
 }
-body .page-1 section.recommendSong ul {
+body .tab-content .page-1 section.recommendSong ul {
   display: flex;
   flex-wrap: wrap;
 }
-body .page-1 section.recommendSong ul li {
+body .tab-content .page-1 section.recommendSong ul li {
   flex: 1 1 30%;
   padding: 1px;
   box-sizing: border-box;
   vertical-align: top;
   margin-bottom: 16px;
 }
-body .page-1 section.recommendSong ul li img {
+body .tab-content .page-1 section.recommendSong ul li img {
   vertical-align: top;
 }
-body .page-1 section.recommendSong ul li p {
+body .tab-content .page-1 section.recommendSong ul li p {
   padding: 6px 2px 0 6px;
   text-align: left;
   font-size: 13px;
 }
-body .page-1 .latest-song h1 {
+body .tab-content .page-1 .latest-song h1 {
   font-weight: normal;
   font-size: 17px;
   margin-bottom: 14px;
@@ -106,19 +122,19 @@ body .page-1 .latest-song h1 {
   line-height: 1;
   border-left: 2px solid #f00;
 }
-body .page-1 .latest-song ul {
+body .tab-content .page-1 .latest-song ul {
   padding: 0 10px;
 }
-body .page-1 .latest-song ul li {
+body .tab-content .page-1 .latest-song ul li {
   text-align: left;
   display: flex;
   border-bottom: 1px solid rgba(214,214,200,0.4);
 }
-body .page-1 .latest-song ul .left {
+body .tab-content .page-1 .latest-song ul .left {
   flex: 1;
   padding: 6px 0;
 }
-body .page-1 .latest-song ul .left h2 {
+body .tab-content .page-1 .latest-song ul .left h2 {
   font-weight: normal;
   font-size: 17px;
   line-height: 1.46;
@@ -127,16 +143,26 @@ body .page-1 .latest-song ul .left h2 {
   overflow: hidden;
   width: 15em;
 }
-body .page-1 .latest-song ul .left .text {
+body .tab-content .page-1 .latest-song ul .left .text {
   line-height: 1.48;
-span
-  font-size: 12px;
 }
-body .page-1 .latest-song ul .left .text span.details {
+body .tab-content .page-1 .latest-song ul .left .text span.sq {
+  display: inline-block;
+  vertical-align: top;
+  width: 12px;
+  height: 8px;
+  vertical-align: baseline;
+  background-image: url("//s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880=");
+  background-size: 166px 97px;
+}
+body .tab-content .page-1 .latest-song ul .left .text span.details {
+  display: inline-block;
+  vertical-align: baseline;
+  font-size: 12px;
   margin-left: 4px;
   color: #888;
 }
-body .page-1 .latest-song ul .right {
+body .tab-content .page-1 .latest-song ul .right {
   color: #f00;
   flex: 0 0 auto;
   display: flex;
@@ -144,21 +170,21 @@ body .page-1 .latest-song ul .right {
   align-items: center;
   margin-left: 10px;
 }
-body .page-1 .latest-song ul .right .play svg {
+body .tab-content .page-1 .latest-song ul .right .play svg {
   fill: #aaa;
   width: 22px;
   height: 22px;
   vertical-align: middle;
 }
-body .page-2 {
+body .tab-content .page-2 {
   display: none;
 }
-body .page-2.active {
+body .tab-content .page-2.active {
   display: block;
 }
-body .page-3 {
+body .tab-content .page-3 {
   display: none;
 }
-body .page-3.active {
+body .tab-content .page-3.active {
   display: block;
 }

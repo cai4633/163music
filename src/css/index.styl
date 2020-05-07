@@ -1,11 +1,14 @@
 body
   width 100vw
-
+  height 100vh
   header
     color #333
     background-color rgb(212, 60, 51)
     padding 24px 10px
-
+    position fixed
+    top 0 
+    left 0
+    width 100vw
     .logo
       float left
       margin-top 5px
@@ -19,6 +22,7 @@ body
 
     .download
       float right
+      padding-right 20px
       text-align center
 
       span
@@ -31,6 +35,11 @@ body
         width 100px
 
   nav
+    background-color #fff
+    position fixed
+    width 100vw
+    top 84px 
+    left 0
     ul
       display flex
       flex-wrap nowrap
@@ -65,97 +74,108 @@ body
           span
             display inline-block
             line-height 2.67
+  .tab-content
+    margin-top 124px
+    .page-1
+      display none
+      &.active
+        display block
+      section.recommendSong
+        padding 20px 0
 
-  .page-1
-    display none
-    &.active
-      display block
-    section.recommendSong
-      padding 20px 0
+        h1
+          padding-left 9px
+          font-size 17px
+          margin-bottom 14px
+          font-weight normal
 
-      h1
-        padding-left 9px
-        font-size 17px
-        margin-bottom 14px
-        font-weight normal
+        ul
+          display flex
+          flex-wrap wrap
 
-      ul
-        display flex
-        flex-wrap wrap
-
-        li
-          flex 1 1 30%
-          padding 1px
-          box-sizing border-box
-          vertical-align top
-          margin-bottom 16px
-
-          img
+          li
+            flex 1 1 30%
+            padding 1px
+            box-sizing border-box
             vertical-align top
+            margin-bottom 16px
 
-          p
-            padding 6px 2px 0 6px
+            img
+              vertical-align top
+
+            p
+              padding 6px 2px 0 6px
+              text-align left
+              font-size 13px
+
+      .latest-song
+        h1
+          font-weight normal
+          font-size 17px
+          margin-bottom 14px
+          padding-left 9px
+          line-height 1
+          border-left 2px solid red
+
+        ul
+          padding 0 10px
+
+          li
             text-align left
-            font-size 13px
+            display flex
+            border-bottom 1px solid rgba(214, 214, 200, 0.4)
 
-    .latest-song
-      h1
-        font-weight normal
-        font-size 17px
-        margin-bottom 14px
-        padding-left 9px
-        line-height 1
-        border-left 2px solid red
+          .left
+            flex 1
+            padding 6px 0
 
-      ul
-        padding 0 10px
+            h2
+              font-weight normal
+              font-size 17px
+              line-height 1.46
+              white-space nowrap
+              text-overflow ellipsis
+              overflow hidden
+              width 15em
 
-        li
-          text-align left
-          display flex
-          border-bottom 1px solid rgba(214, 214, 200, 0.4)
+            .text
+              line-height 1.48
+              span.sq
+                display inline-block
+                vertical-align top
+                width 12px           
+                height 8px
+                vertical-align baseline
+                background-image url('//s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880=')
+                background-size 166px 97px
 
-        .left
-          flex 1
-          padding 6px 0
 
-          h2
-            font-weight normal
-            font-size 17px
-            line-height 1.46
-            white-space nowrap
-            text-overflow ellipsis
-            overflow hidden
-            width 15em
+              span.details
+                display inline-block
+                vertical-align baseline
+                font-size 12px
+                margin-left 4px
+                color #888
 
-          .text
-            line-height 1.48
-            span
-            font-size 12px
+          .right
+            color red
+            flex 0 0 auto
+            display flex
+            justify-content center
+            align-items center
+            margin-left 10px
 
-            span.details
-              margin-left 4px
-              color #888
-
-        .right
-          color red
-          flex 0 0 auto
-          display flex
-          justify-content center
-          align-items center
-          margin-left 10px
-
-          .play svg
-            fill #aaaaaa
-            width 22px
-            height 22px
-            vertical-align middle
-  .page-2
-    display none
-    &.active
-      display block
-  .page-3
-    display none
-    &.active
-      display block
+            .play svg
+              fill #aaaaaa
+              width 22px
+              height 22px
+              vertical-align middle
+    .page-2
+      display none
+      &.active
+        display block
+    .page-3
+      display none
+      &.active
+        display block
 
