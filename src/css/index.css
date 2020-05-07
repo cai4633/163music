@@ -1,24 +1,24 @@
-header {
+body header {
   color: #333;
   background-color: #d43c33;
   padding: 24px 10px;
 }
-header .logo {
+body header .logo {
   float: left;
   margin-top: 5px;
 }
-header .logo svg {
+body header .logo svg {
   font-size: 16px;
   line-height: 2.25;
   vertical-align: middle;
   width: 142px;
   height: 25px;
 }
-header .download {
+body header .download {
   float: right;
   text-align: center;
 }
-header .download span {
+body header .download span {
   color: #da5a53;
   display: block;
   background-color: #fff;
@@ -27,26 +27,26 @@ header .download span {
   line-height: 2.25;
   width: 100px;
 }
-nav ul {
+body nav ul {
   display: flex;
   flex-wrap: nowrap;
   text-align: center;
   font-size: 15px;
   border-bottom: 1px solid rgba(214,214,200,0.4);
 }
-nav ul li {
+body nav ul li {
   flex: 1;
   width: 30%;
 }
-nav ul li a {
+body nav ul li a {
   padding: 0 5px;
   display: inline-block;
   position: relative;
 }
-nav ul li a.active {
+body nav ul li a.active {
   color: #e01830;
 }
-nav ul li a.active::after {
+body nav ul li a.active::after {
   position: absolute;
   left: 0;
   bottom: -1px;
@@ -56,39 +56,39 @@ nav ul li a.active::after {
   height: 3px;
   background-color: #e01830;
 }
-nav ul li a span {
+body nav ul li a span {
   display: inline-block;
   line-height: 2.67;
 }
-section.recommendSong {
+body section.recommendSong {
   padding: 20px 0;
 }
-section.recommendSong h1 {
+body section.recommendSong h1 {
   padding-left: 9px;
   font-size: 17px;
   margin-bottom: 14px;
   font-weight: normal;
 }
-section.recommendSong ul {
+body section.recommendSong ul {
   display: flex;
   flex-wrap: wrap;
 }
-section.recommendSong ul li {
+body section.recommendSong ul li {
   flex: 1 1 30%;
   padding: 1px;
   box-sizing: border-box;
   vertical-align: top;
   margin-bottom: 16px;
 }
-section.recommendSong ul li img {
+body section.recommendSong ul li img {
   vertical-align: top;
 }
-section.recommendSong ul li p {
+body section.recommendSong ul li p {
   padding: 6px 2px 0 6px;
   text-align: left;
   font-size: 13px;
 }
-.latest h1 {
+body .latest-song h1 {
   font-weight: normal;
   font-size: 17px;
   margin-bottom: 14px;
@@ -96,19 +96,19 @@ section.recommendSong ul li p {
   line-height: 1;
   border-left: 2px solid #f00;
 }
-.latest ul {
+body .latest-song ul {
   padding: 0 10px;
 }
-.latest ul li {
+body .latest-song ul li {
   text-align: left;
   display: flex;
   border-bottom: 1px solid rgba(214,214,200,0.4);
 }
-.latest ul .left {
+body .latest-song ul .left {
   flex: 1;
   padding: 6px 0;
 }
-.latest ul .left h2 {
+body .latest-song ul .left h2 {
   font-weight: normal;
   font-size: 17px;
   line-height: 1.46;
@@ -117,17 +117,16 @@ section.recommendSong ul li p {
   overflow: hidden;
   width: 15em;
 }
-.latest ul .left .text {
+body .latest-song ul .left .text {
   line-height: 1.48;
-}
-.latest ul .left .text span {
+span
   font-size: 12px;
 }
-.latest ul .left .text span.details {
+body .latest-song ul .left .text span.details {
   margin-left: 4px;
   color: #888;
 }
-.latest ul .right {
+body .latest-song ul .right {
   color: #f00;
   flex: 0 0 auto;
   display: flex;
@@ -135,7 +134,7 @@ section.recommendSong ul li p {
   align-items: center;
   margin-left: 10px;
 }
-.latest ul .right .play svg {
+body .latest-song ul .right .play svg {
   fill: #aaa;
   width: 22px;
   height: 22px;
