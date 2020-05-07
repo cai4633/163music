@@ -1,19 +1,19 @@
 {
   let view = {
-    el: ".top-nav",
+    el: ".tab-nav",
     init() {
       this.$el = $(this.el)
     },
     template: `
     <ul>
       <li>
-        <a href="javascript:;" class="active"><span>推荐音乐</span></a>
+        <a href="javascript:;" data-id='page-1' class="active"><span>推荐音乐</span></a>
       </li>
       <li>
-        <a href="javascript:;"><span>热歌榜</span></a>
+        <a href="javascript:;" data-id='page-2'><span>热歌榜</span></a>
       </li>
       <li>
-        <a href="javascript:;"><span>搜索</span></a>
+        <a href="javascript:;" data-id='page-3'><span>搜索</span></a>
       </li>
     </ul>
   `,
@@ -35,6 +35,7 @@
         e.preventDefault()
         this.view.$el.find('a').removeClass('active')
         $(e.currentTarget).addClass('active')
+        window.eventHub.emit('tab-switch',$(e.currentTarget).attr('data-id'))
       })
     },
   }

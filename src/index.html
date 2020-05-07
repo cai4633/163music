@@ -12,14 +12,20 @@
   </head>
   <body>
     <header class="topbar clearfix"></header>
-    <nav class="top-nav"></nav>
-    <section class="recommendSong"></section>
-    <seciton class="latest-song"></seciton>
+    <nav class="tab-nav"></nav>
+    <section class="tab-content">
+      <div class="page-1 active"></div>
+      <div class="page-2"></div>
+      <div class="page-3"></div>
+    </section>
+
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.js"></script>
     <script src="../../node_modules/leancloud-storage/dist/av-min.js"></script>
-    <script src="./js/index/recommendSong.js"></script>
-    <script src="./js/index/latestSong.js"></script>
-    <script src="./js/index/topNav.js"></script>
+    <script src="./js/eventHub.js"></script>
+    <script src="./js/index/tabNav.js"></script>
     <script src="./js/index/topbar.js"></script>
+    <script src="./js/index/page-1.js"></script>
+    <script src="./js/index/page-2.js"></script>
+    <script src="./js/index/page-3.js"></script>
   </body>
 </html>

@@ -1,3 +1,6 @@
+body {
+  width: 100vw;
+}
 body header {
   color: #333;
   background-color: #d43c33;
@@ -42,6 +45,7 @@ body nav ul li a {
   padding: 0 5px;
   display: inline-block;
   position: relative;
+  -webkit-tap-highlight-color: rgba(255,255,255,0);
 }
 body nav ul li a.active {
   color: #e01830;
@@ -60,35 +64,41 @@ body nav ul li a span {
   display: inline-block;
   line-height: 2.67;
 }
-body section.recommendSong {
+body .page-1 {
+  display: none;
+}
+body .page-1.active {
+  display: block;
+}
+body .page-1 section.recommendSong {
   padding: 20px 0;
 }
-body section.recommendSong h1 {
+body .page-1 section.recommendSong h1 {
   padding-left: 9px;
   font-size: 17px;
   margin-bottom: 14px;
   font-weight: normal;
 }
-body section.recommendSong ul {
+body .page-1 section.recommendSong ul {
   display: flex;
   flex-wrap: wrap;
 }
-body section.recommendSong ul li {
+body .page-1 section.recommendSong ul li {
   flex: 1 1 30%;
   padding: 1px;
   box-sizing: border-box;
   vertical-align: top;
   margin-bottom: 16px;
 }
-body section.recommendSong ul li img {
+body .page-1 section.recommendSong ul li img {
   vertical-align: top;
 }
-body section.recommendSong ul li p {
+body .page-1 section.recommendSong ul li p {
   padding: 6px 2px 0 6px;
   text-align: left;
   font-size: 13px;
 }
-body .latest-song h1 {
+body .page-1 .latest-song h1 {
   font-weight: normal;
   font-size: 17px;
   margin-bottom: 14px;
@@ -96,19 +106,19 @@ body .latest-song h1 {
   line-height: 1;
   border-left: 2px solid #f00;
 }
-body .latest-song ul {
+body .page-1 .latest-song ul {
   padding: 0 10px;
 }
-body .latest-song ul li {
+body .page-1 .latest-song ul li {
   text-align: left;
   display: flex;
   border-bottom: 1px solid rgba(214,214,200,0.4);
 }
-body .latest-song ul .left {
+body .page-1 .latest-song ul .left {
   flex: 1;
   padding: 6px 0;
 }
-body .latest-song ul .left h2 {
+body .page-1 .latest-song ul .left h2 {
   font-weight: normal;
   font-size: 17px;
   line-height: 1.46;
@@ -117,16 +127,16 @@ body .latest-song ul .left h2 {
   overflow: hidden;
   width: 15em;
 }
-body .latest-song ul .left .text {
+body .page-1 .latest-song ul .left .text {
   line-height: 1.48;
 span
   font-size: 12px;
 }
-body .latest-song ul .left .text span.details {
+body .page-1 .latest-song ul .left .text span.details {
   margin-left: 4px;
   color: #888;
 }
-body .latest-song ul .right {
+body .page-1 .latest-song ul .right {
   color: #f00;
   flex: 0 0 auto;
   display: flex;
@@ -134,9 +144,21 @@ body .latest-song ul .right {
   align-items: center;
   margin-left: 10px;
 }
-body .latest-song ul .right .play svg {
+body .page-1 .latest-song ul .right .play svg {
   fill: #aaa;
   width: 22px;
   height: 22px;
   vertical-align: middle;
+}
+body .page-2 {
+  display: none;
+}
+body .page-2.active {
+  display: block;
+}
+body .page-3 {
+  display: none;
+}
+body .page-3.active {
+  display: block;
 }
