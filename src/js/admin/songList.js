@@ -9,11 +9,11 @@
     <ul></ul>
     `,
     render(data = { songs: [] }) {
-      let { songs, selectedID} = data
+      let { songs, selectedID } = data
       let domLis = songs.map((song, index) => {
         let li = $("<li>").text(song["song_name"])
-        if(index === selectedID){
-          li.addClass('active')
+        if (index === selectedID) {
+          li.addClass("active")
         }
         return li
       })
@@ -66,6 +66,10 @@
         this.model.getAllList().then(() => {
           this.view.render(this.model.data)
         })
+      })
+      this.view.$el.on("click", "h1.new", (e) => {
+        this.active(e.target)
+        window.eventHub.emit('getSongInfo',{})
       })
     },
   }

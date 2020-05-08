@@ -89,6 +89,9 @@
           // 更新
           this.model.update(this.model.data.id, this.model.data).then(() => {
             window.eventHub.emit("update", JSON.parse(JSON.stringify(this.model.data)))
+          }).then(()=>{
+            this.model.data = {}
+            this.view.render(this.model.data)
           })
         } else {
           //新建
