@@ -94,8 +94,11 @@ body .view main .row {
 }
 body .view main .row label {
   display: inline-block;
-  width: 4em;
+  width: 6em;
   text-align: right;
+}
+body .view main .row label.outer-url {
+  font-size: 12px;
 }
 body .view main .row input[type=text] {
   border-radius: 4px;
@@ -111,4 +114,9 @@ body .view main .row input[type=submit] {
   display: inline-block;
   height: 29px;
   padding: 0 5px;
+}
+body .view main .row input[type=checkbox] {
+  padding: 5px;
+  margin-left: 5px;
+  vertical-align: middle;
 }

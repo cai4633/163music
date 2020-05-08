@@ -8,13 +8,14 @@
     <h1>新建歌曲</h1>
     <form action="">
       <div class="row">
-        <label for="song_name">歌名</label><input id="song_name" type="text" value='__song_name__'>
+        <label for="song_name">歌名</label><input id="song_name" type="text" value='__song_name__' required='required'>
       </div>
       <div class="row">
-        <label for="singer">歌手</label><input id="singer" type="text" value='__singer__'>
+        <label for="singer">歌手</label><input id="singer" type="text" value='__singer__' required='required'>
       </div>
       <div class="row">
-        <label for="song_url">外链</label><input id="song_url" type="text" value='__song_url__'>
+        <label for="song_url">外链</label><input id="song_url" type="text" value='__song_url__' required='required'>
+        <label for="163_url" class='outer-url'>网易云外链</label><input id="outer-url" type="checkbox" checked value='outer-url'>
       </div>
       <div class="row">
         <input type="submit" value="提交" class='submit'>
@@ -44,19 +45,20 @@
       }
       return testObject.save().then(
         (object) => {
-          Object.assign(this.data, {id: object.id})
+          Object.assign(this.data, { id: object.id })
         },
         (err) => {
           console.log(err)
         }
       )
     },
-    update(id,obj) {
+    update(id, obj) {
       const song = AV.Object.createWithoutData("Song", id)
       let str = ["song_name", "song_url", "singer"]
-      str.forEach((key)=>{ song.set(key,obj[key]) })
-      return song.save().then(()=>{
+      str.forEach((key) => {
+        song.set(key, obj[key])
       })
+      return song.save().then(() => {})
     },
   }
 
@@ -67,6 +69,9 @@
       this.view.render(this.model.data)
       this.bindEvents()
     },
+    getOuterUrl(url) {
+      return url.match(/\?id\=(\d+)/)
+    },
     bindEvents() {
       this.view.$el.on("submit", "form", (e) => {
         e.preventDefault()
@@ -74,10 +79,15 @@
         strs.forEach((str) => {
           data[str] = $(`#${str}`).val()
         })
+        if ($("#outer-url").prop("checked")) {
+          let temp= this.getOuterUrl(data["song_url"])[1]
+          data['song_url'] = `http://music.163.com/song/media/outer/url?id=${temp}.mp3`
+          console.log(data['song_url'])
+        }
         Object.assign(this.model.data, data)
         if (this.model.data.id) {
           // 更新
-          this.model.update(this.model.data.id, this.model.data).then(()=>{
+          this.model.update(this.model.data.id, this.model.data).then(() => {
             window.eventHub.emit("update", JSON.parse(JSON.stringify(this.model.data)))
           })
         } else {
@@ -86,7 +96,6 @@
             this.view.reset()
             window.eventHub.emit("new", this.model.data)
           })
-          
         }
       })
       window.eventHub.on("getSongInfo", (data) => {
