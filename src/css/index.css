@@ -86,6 +86,31 @@ body .tab-content .page-1 {
 body .tab-content .page-1.active {
   display: block;
 }
+body .tab-content .page-1 footer {
+  background-image: url("//s3.music.126.net/mobile-new/img/recommand_bg_3x.png?f3a9aaa781c3bf3b543d129327d35fce=");
+  background-size: cover;
+  text-align: center;
+  padding-bottom: 20px;
+}
+body .tab-content .page-1 footer .logo {
+  padding-top: 64px;
+}
+body .tab-content .page-1 footer .logo svg {
+  margin: 0 43px;
+  height: 44px;
+}
+body .tab-content .page-1 footer .openApp {
+  color: #f00;
+  font-size: 16px;
+  border: 1px solid #f00;
+  margin: 15px 37px 5px;
+  line-height: 2.5;
+  border-radius: 30px;
+}
+body .tab-content .page-1 footer p {
+  font-size: 12px;
+  color: #888;
+}
 body .tab-content .page-1 section.recommendSong {
   padding: 20px 0;
 }
