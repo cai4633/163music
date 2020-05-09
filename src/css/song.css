@@ -2,11 +2,21 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #fff;
-  background-image: url("http://p3.music.126.net/Z8L2Mde2m6TBFeaAEA_PlQ==/109951164966200321.jpg");
+  background-image: url("https://p4.music.126.net/66ewnuFNHla7YJWt7zT8nw==/109951164922923585.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
-body .mask {
+body .icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+body .playSong {
+  height: 100vh;
+}
+body .playSong .mask {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -15,18 +25,18 @@ body .mask {
   background-color: rgba(0,0,0,0.5);
   z-index: -1;
 }
-body .logo svg {
+body .playSong .logo svg {
   margin: 12px 0 0 10px;
   width: 92px;
   height: 17px;
 }
-body .song-disc {
+body .playSong .song-disc {
   position: relative;
   width: 296px;
   height: 296px;
   margin: 35px auto 0px;
 }
-body .song-disc::before {
+body .playSong .song-disc::before {
   content: '';
   position: absolute;
   top: 0;
@@ -36,7 +46,7 @@ body .song-disc::before {
   background: url("http://s3.music.126.net/mobile-new/img/disc.png?d3bdd1080a72129346aa0b4b4964b75f=") no-repeat;
   background-size: cover;
 }
-body .song-disc .light {
+body .playSong .song-disc .light {
   background-image: url("https://s3.music.126.net/mobile-new/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577=");
   position: absolute;
   top: 0;
@@ -45,15 +55,40 @@ body .song-disc .light {
   right: 0;
   background-size: cover;
 }
-body .song-disc .song-image {
+body .playSong .song-disc .song-image {
   width: 184px;
   height: 184px;
   border-radius: 50%;
-  over-flow: hidden;
+  overflow: hidden;
   background: url("http://s3.music.126.net/mobile-new/img/disc_default.png?7c9b3ad%E2%80%A6=") no-repeat;
   background-size: cover;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate3d(-50%, -50%, 0);
+}
+body .playSong .song-disc .song-image img {
+  width: 100%;
+  border-radius: 50%;
+}
+body .playSong .song-disc .song-image .play-btn {
+  outline: none;
+  border: 1px solid #fff;
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  background-color: rgba(113,126,137,0.9);
+  border-radius: 50%;
+  vertical-align: top;
+  padding: 8.75px;
+}
+body .playSong .song-disc .song-image .play-btn.hidden {
+  display: none;
+}
+body .playSong .song-disc .song-image .play-btn svg {
+  width: 35px;
+  height: 35px;
+  vertical-align: top;
 }

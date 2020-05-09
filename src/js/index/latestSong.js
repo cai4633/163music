@@ -9,7 +9,7 @@
     <ul>{{contents}}</ul>
   `,
     li: `
-    <li>
+    <li data-id='{{song_url}}'>
     <div class="left">
       <h2>{{song_name}}</h2>
       <div class="text"><span class='sq'></span><span class="details">{{singer}}-{{song_name}}</span></div>
@@ -24,7 +24,7 @@
   </li>`,
     render(data) {
       let songs = data.songs
-      let keys = ['song_name','singer']
+      let keys = ['song_name','singer','song_url']
       let texts = []
       songs.forEach((song)=>{
         let text = this.li
@@ -54,6 +54,15 @@
       this.model.getAllList().then(() => {
         console.log(this.model.data)
         this.view.render(this.model.data)
+        this.bindEvent()
+      })
+    },
+    bindEvent(){
+      this.view.$el.find('ul li').on('click',(e)=>{
+        // debugger
+        let url = '/src/song.html?id=' + encodeURIComponent($(e.currentTarget).attr('data-id'))
+        // debugger
+        window.open(url,'_self')
       })
     },
   }
