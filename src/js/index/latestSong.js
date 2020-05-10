@@ -59,9 +59,8 @@
     },
     bindEvent(){
       this.view.$el.find('ul li').on('click',(e)=>{
-        // debugger
-        let url = '/src/song.html?id=' + encodeURIComponent($(e.currentTarget).attr('data-id'))
-        // debugger
+        let url= document.URL.replace(/\/(?:index.html)?$/,'/song.html?id=')
+        url += encodeURIComponent($(e.currentTarget).attr('data-id'))
         window.open(url,'_self')
       })
     },
