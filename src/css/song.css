@@ -98,6 +98,23 @@ body .playSong .song-disc .play-btn svg {
   height: 35px;
   vertical-align: top;
 }
+body .playSong .lyrics {
+  box-sizing: border-box;
+  border: 1px solid #000;
+  width: 100%;
+  height: 10em;
+  padding: 10px 20px;
+  text-align: center;
+}
+body .playSong .lyrics p {
+  font-size: 16px;
+  color: #858588;
+  line-height: 2;
+}
+body .playSong .lyrics p:first-child {
+  font-size: 20px;
+  color: #dfe0e0;
+}
 @-moz-keyframes rollDesc {
   0% {
     transform: rotate(0deg);
