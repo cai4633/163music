@@ -30,13 +30,19 @@ body .playSong .logo svg {
   width: 92px;
   height: 17px;
 }
+body .playSong .rotate {
+  animation: rollDesc 15s infinite linear;
+}
 body .playSong .song-disc {
+  position: relative;
+}
+body .playSong .song-disc .roll-wrap {
   position: relative;
   width: 296px;
   height: 296px;
   margin: 35px auto 0px;
 }
-body .playSong .song-disc::before {
+body .playSong .song-disc .roll-wrap::before {
   content: '';
   position: absolute;
   top: 0;
@@ -46,7 +52,7 @@ body .playSong .song-disc::before {
   background: url("http://s3.music.126.net/mobile-new/img/disc.png?d3bdd1080a72129346aa0b4b4964b75f=") no-repeat;
   background-size: cover;
 }
-body .playSong .song-disc .light {
+body .playSong .song-disc .roll-wrap .light {
   background-image: url("https://s3.music.126.net/mobile-new/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577=");
   position: absolute;
   top: 0;
@@ -55,7 +61,7 @@ body .playSong .song-disc .light {
   right: 0;
   background-size: cover;
 }
-body .playSong .song-disc .song-image {
+body .playSong .song-disc .roll-wrap .song-image {
   width: 184px;
   height: 184px;
   border-radius: 50%;
@@ -67,11 +73,11 @@ body .playSong .song-disc .song-image {
   top: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
-body .playSong .song-disc .song-image img {
+body .playSong .song-disc .roll-wrap .song-image img {
   width: 100%;
   border-radius: 50%;
 }
-body .playSong .song-disc .song-image .play-btn {
+body .playSong .song-disc .play-btn {
   outline: none;
   border: 1px solid #fff;
   position: absolute;
@@ -84,11 +90,43 @@ body .playSong .song-disc .song-image .play-btn {
   vertical-align: top;
   padding: 8.75px;
 }
-body .playSong .song-disc .song-image .play-btn.hidden {
+body .playSong .song-disc .play-btn.hidden {
   display: none;
 }
-body .playSong .song-disc .song-image .play-btn svg {
+body .playSong .song-disc .play-btn svg {
   width: 35px;
   height: 35px;
   vertical-align: top;
+}
+@-moz-keyframes rollDesc {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rollDesc {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes rollDesc {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rollDesc {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

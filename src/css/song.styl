@@ -15,6 +15,7 @@ body
 
   .playSong
     height 100vh
+
     .mask
       position fixed
       top 0
@@ -30,63 +31,75 @@ body
         width 92px
         height 17px
 
+    .rotate
+      animation rollDesc 15s infinite linear
+
+    @keyframes rollDesc
+      0%
+        transform rotate(0deg)
+
+      100%
+        transform rotate(360deg)
+
     .song-disc
       position relative
-      width 296px
-      height @width
-      margin 35px auto 0px
-
-      &::before
-        content ''
-        position absolute
-        top 0
-        bottom 0
-        left 0
-        right 0
-        background url('http://s3.music.126.net/mobile-new/img/disc.png?d3bdd1080a72129346aa0b4b4964b75f=') no-repeat
-        background-size cover
-
-      .light
-        background-image url('https://s3.music.126.net/mobile-new/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577=')
-        position absolute
-        top 0
-        bottom 0
-        left 0
-        right 0
-        background-size cover
-
-      .song-image
-        width 184px
+      .roll-wrap
+        position relative
+        width 296px
         height @width
-        border-radius 50%
-        overflow hidden
-        background url('http://s3.music.126.net/mobile-new/img/disc_default.png?7c9b3ad%E2%80%A6=') no-repeat
-        background-size cover
-        position absolute
-        left 50%
-        top 50%
-        transform translate3d(-50%, -50%, 0)
-
-        img
-          width 100%
-          border-radius 50%
-        .play-btn
-          $svgWidth = 35px
-          outline none
-          border 1px solid #fff
+        margin 35px auto 0px
+        &::before
+          content ''
           position absolute
-          z-index 5
-          top 50%
-          left 50%
-          transform translate3d(-50%,-50%,0)
-          background-color rgba(113, 126, 137,0.9)
-          border-radius 50%
-          vertical-align top
-          padding (10px/40)*$svgWidth
-          &.hidden
-            display none
-          svg
-            width $svgWidth
-            height $svgWidth
-            vertical-align top
+          top 0
+          bottom 0
+          left 0
+          right 0
+          background url('http://s3.music.126.net/mobile-new/img/disc.png?d3bdd1080a72129346aa0b4b4964b75f=') no-repeat
+          background-size cover
+        .light
+          background-image url('https://s3.music.126.net/mobile-new/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577=')
+          position absolute
+          top 0
+          bottom 0
+          left 0
+          right 0
+          background-size cover
 
+        .song-image
+          width 184px
+          height @width
+          border-radius 50%
+          overflow hidden
+          background url('http://s3.music.126.net/mobile-new/img/disc_default.png?7c9b3ad%E2%80%A6=') no-repeat
+          background-size cover
+          position absolute
+          left 50%
+          top 50%
+          transform translate3d(-50%, -50%, 0)
+
+          img
+            width 100%
+            border-radius 50%
+
+      .play-btn
+        $svgWidth = 35px
+        outline none
+        border 1px solid #fff
+        position absolute
+        z-index 5
+        top 50%
+        left 50%
+        transform translate3d(-50%, -50%, 0)
+        background-color rgba(113, 126, 137, 0.9)
+        border-radius 50%
+        vertical-align top
+        padding (10px / 40) * $svgWidth
+
+        &.hidden
+          display none
+
+        svg
+          width $svgWidth
+          height $svgWidth
+          vertical-align top

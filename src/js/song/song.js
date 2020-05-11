@@ -10,13 +10,15 @@
       </div>
     </header>
     <div class="song-disc">
-      <div class="light"></div>
-      <div class="song-image">
-        <img src="http://p1.music.126.net/rFUKVdOjqxgwAT6Zi6qv7A==/109951164906689206.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0" alt="">
-        <button class="play-btn">
-          <svg class="icon" aria-hidden="true"> <use xlink:href="#icon-play1"></use> </svg>
-        </button>
+      <div class="roll-wrap">
+        <div class="light"></div>
+        <div class="song-image">
+          <img src="http://p1.music.126.net/rFUKVdOjqxgwAT6Zi6qv7A==/109951164906689206.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0" alt="">
+        </div>
       </div>
+      <button class="play-btn">
+        <svg class="icon" aria-hidden="true"> <use xlink:href="#icon-play1"></use> </svg>
+      </button>
     </div>
       `,
     init() {
@@ -53,10 +55,15 @@
         if ($("audio")[0].paused) {
           $("audio")[0].play()
           $(".play-btn").addClass('hidden')
+          if($('#audio')[0].currentTime === 0){
+            $('.roll-wrap').addClass('rotate')
+          }else{
+            $('.roll-wrap').css('animation-play-state','running')
+          }
         } else {
           $("audio")[0].pause()
           $(".play-btn").removeClass('hidden')
-
+          $('.roll-wrap').css('animation-play-state','paused')
         }
       })
     },
