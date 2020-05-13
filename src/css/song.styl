@@ -104,19 +104,29 @@ body
           height $svgWidth
           vertical-align top
     
-    .lyrics
+    .lyric-wrapper
       box-sizing border-box
-      border 1px solid #000
-      width 100%
-      height 10em
       // overflow hidden
       padding 10px 20px
       text-align center
-      p
+      h1
+        font-size 20px
+        color #dfe0e0
+      .lyric-move-wrap
         font-size 16px
-        color #858588
-        line-height 2
-        &:first-child
-          font-size 20px
-          color #dfe0e0
-      
+        width 100%
+        height 7.2em
+        border 1px solid #000
+        overflow hidden
+        .lyric-move
+          transition all 0.3s linear
+          .active
+            color #dfe0e0
+          p
+            color #858588
+            line-height 2
+            height 2em
+            &:empty
+              height 0.5em
+
+        

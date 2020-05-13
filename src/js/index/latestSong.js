@@ -9,7 +9,7 @@
     <ul>{{contents}}</ul>
   `,
     li: `
-    <li data-id='{{song_url}}'>
+    <li data-id='{{id}}'>
     <div class="left">
       <h2>{{song_name}}</h2>
       <div class="text"><span class='sq'></span><span class="details">{{singer}}-{{song_name}}</span></div>
@@ -24,7 +24,7 @@
   </li>`,
     render(data) {
       let songs = data.songs
-      let keys = ['song_name','singer','song_url']
+      let keys = ['song_name','singer','id']
       let texts = []
       songs.forEach((song)=>{
         let text = this.li

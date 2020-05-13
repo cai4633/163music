@@ -20,23 +20,31 @@
         <svg class="icon" aria-hidden="true"> <use xlink:href="#icon-play1"></use> </svg>
       </button>
     </div>
-    <div class='lyrics'></div>
+    <div class='lyric-wrapper'>
+      <h1>{{song_name}}</h1>
+      <div class='lyric-move-wrap'>
+        <div class='lyric-move'></div>
+      </div>
+    </div>
       `,
     init() {
       this.$el = $(this.el)
       $(() => {})
     },
     render(data) {
-      let html = this.template.replace("{{song_url}}", data.song || "")
+      let keys = ["song_url", "song_name"]
+      let html = this.template
+      keys.forEach((key) => {
+        html = html.replace(`{{${key}}}`, data[key] || "")
+      })
       this.$el.html(html)
     },
   }
 
   let model = {
     data: {
-      song: "",
+      song_url: "",
       lyrics: `
-    [00:01.95]有何不可
     [00:15.20]许嵩
     [00:21.00]
     [00:22.80]天空好像下雨
@@ -94,9 +102,13 @@
     [03:45.93]夏末秋凉里带一点温热 有换季的颜色
       `,
     },
-    getQuery(p) {
+    getSong() {
       let id = decodeURIComponent(document.location.search.match(/id\=(.+)/)[1])
-      this.data.song = id
+      const query = new AV.Query("Song")
+      return query.get(id).then((todo) => {
+        todo = todo.toJSON()
+        Object.assign(this.data, todo)
+      })
     },
   }
 
@@ -105,15 +117,17 @@
       this.view = view
       this.model = model
       this.view.init()
-      this.model.getQuery()
-      this.view.render(this.model.data)
-      this.bindEvents()
-      this.getLyrics(this.model.data.lyrics)
+      this.model.getSong().then(() => {
+        this.view.render(this.model.data)
+        this.getLyrics(this.model.data.lyrics)
+        this.bindEvents()
+      })
     },
     bindEvents() {
       this.view.$el.on("click", () => {
         if ($("audio")[0].paused) {
           $("audio")[0].play()
+          // $('audio')[0].playbackRate = 3
           $(".play-btn").addClass("hidden")
           if ($("#audio")[0].currentTime === 0) {
             $(".roll-wrap").addClass("rotate")
@@ -135,16 +149,33 @@
           $(".roll-wrap").removeClass("rotate")
           $(".play-btn").removeClass("hidden")
         })
+        .on("timeupdate", (e) => {
+          let ct = e.currentTarget.currentTime + 0.8
+          console.log(ct)
+          let p = $(".lyric-move p")
+          let height = p.height()
+          for (let i = 0; i < p.length; i++) {
+            let curTime = parseFloat($(p[i]).attr("data-time"), 10)
+            let nextTime = parseFloat($(p[i + 1]).attr("data-time"), 10)
+            if (ct >= curTime && (!nextTime || ct <= nextTime)) {
+              i <= 1 || $(".lyric-move").css("transform", `translateY(${-(i - 1) * height}px)`)
+              $(p[i]).addClass("active").siblings().removeClass("active")
+              break
+            }
+          }
+        })
     },
     getLyrics(data) {
       let arr = data.trim().split("\n")
-      let lys = []
       arr.forEach((txt) => {
-        let [key, value] = [txt.trim().match(/\[(\d+[:\.]?)+\]/g)[0], txt.trim().match(/\[(?:\d+[:\.]?)+\](.*)/)[1]]
-        $("<p>").text(value).appendTo($(".lyrics"))
-        lys.push({[key]:value})
+        let [key, value] = [txt.trim().match(/\[((?:\d+[:\.]?)+)\]/)[1], txt.trim().match(/\[(?:\d+[:\.]?)+\](.*)/)[1]]
+        let temp = key.split(":")
+        value &&
+          $("<p>")
+            .text(value)
+            .appendTo($(".lyric-move"))
+            .attr("data-time", (temp[0] - 0) * 60 + (temp[1] - 0))
       })
-      console.dir(lys)
     },
   }
 
