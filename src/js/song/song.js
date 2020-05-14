@@ -127,7 +127,6 @@
       this.view.$el.on("click", () => {
         if ($("audio")[0].paused) {
           $("audio")[0].play()
-          // $('audio')[0].playbackRate = 3
           $(".play-btn").addClass("hidden")
           if ($("#audio")[0].currentTime === 0) {
             $(".roll-wrap").addClass("rotate")
@@ -144,22 +143,21 @@
         .on("play", (e) => {
           $(".play-btn").addClass("hidden")
           $(".roll-wrap").addClass("rotate")
+          // e.currentTarget.playbackRate = 10
         })
         .on("ended", () => {
           $(".roll-wrap").removeClass("rotate")
           $(".play-btn").removeClass("hidden")
+          this.lyricReset()
         })
         .on("timeupdate", (e) => {
           let ct = e.currentTarget.currentTime + 0.8
-          console.log(ct)
-          let p = $(".lyric-move p")
-          let height = p.height()
+          let [p,height] = [$(".lyric-move p"),$(".lyric-move p").height()]
           for (let i = 0; i < p.length; i++) {
             let curTime = parseFloat($(p[i]).attr("data-time"), 10)
             let nextTime = parseFloat($(p[i + 1]).attr("data-time"), 10)
             if (ct >= curTime && (!nextTime || ct <= nextTime)) {
-              i <= 1 || $(".lyric-move").css("transform", `translateY(${-(i - 1) * height}px)`)
-              $(p[i]).addClass("active").siblings().removeClass("active")
+              this.goToLyricLine(i, height)
               break
             }
           }
@@ -176,6 +174,14 @@
             .appendTo($(".lyric-move"))
             .attr("data-time", (temp[0] - 0) * 60 + (temp[1] - 0))
       })
+    },
+    lyricReset() {
+      $(".lyric-move").css("transform", `translateY(0px)`)
+    },
+    goToLyricLine(num) {
+      let [p,height] = [$(".lyric-move p"),$(".lyric-move p").height()]
+      num <= 1 || $(".lyric-move").css("transform", `translateY(${-(num - 1) * height}px)`)
+      $(p[num]).addClass("active").siblings().removeClass("active")
     },
   }
 
