@@ -48,7 +48,7 @@
       lyric: ``,
     },
     getSong() {
-      let id = decodeURIComponent(document.location.search.match(/id\=(.+)/)[1])
+      let id = decodeURIComponent(document.location.search.match(/id\=([^&\n]+)?/)[1])
       const query = new AV.Query("Song")
       return query.get(id).then((todo) => {
         todo = todo.toJSON()
