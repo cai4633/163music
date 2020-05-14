@@ -18,12 +18,15 @@
         <label for="163_url" class='outer-url'>网易云外链</label><input id="outer-url" type="checkbox" checked value='outer-url'>
       </div>
       <div class="row">
+        <label for="lyric">歌词</label><textarea id="lyric" cols='40' rows='10' required >__lyric__</textarea>
+      </div>
+      <div class="row">
         <input type="submit" value="提交" class='submit'>
       </div>
     </form>
   `,
     render(data = {}) {
-      let [placeholder, html] = [["song_name", "singer", "song_url"], this.template]
+      let [placeholder, html] = [["song_name", "singer", "song_url", "lyric"], this.template]
       placeholder.forEach((str) => (html = html.replace(`__${str}__`, data[str] || "")))
       if (data.id) {
         html = html.replace("新建歌曲", "编辑歌曲")
@@ -54,7 +57,7 @@
     },
     update(id, obj) {
       const song = AV.Object.createWithoutData("Song", id)
-      let str = ["song_name", "song_url", "singer"]
+      let str = ["song_name", "song_url", "singer","lyric"]
       str.forEach((key) => {
         song.set(key, obj[key])
       })
@@ -70,29 +73,31 @@
       this.bindEvents()
     },
     getOuterUrl(url) {
-      return url.match(/\?id\=(\d+)/)
+      return url.match(/(^\d+$)/) || url.match(/\?id\=(\d+)/)
     },
     bindEvents() {
       this.view.$el.on("submit", "form", (e) => {
         e.preventDefault()
-        let [strs, data] = [["song_name", "song_url", "singer"], {}]
+        let [strs, data] = [["song_name", "song_url", "singer", 'lyric'], {}]
         strs.forEach((str) => {
           data[str] = $(`#${str}`).val()
         })
         if ($("#outer-url").prop("checked")) {
-          let temp= this.getOuterUrl(data["song_url"])[1]
-          data['song_url'] = `http://music.163.com/song/media/outer/url?id=${temp}.mp3`
-          console.log(data['song_url'])
+          let temp = this.getOuterUrl(data["song_url"])[1]
+          data["song_url"] = `http://music.163.com/song/media/outer/url?id=${temp}.mp3`
         }
         Object.assign(this.model.data, data)
         if (this.model.data.id) {
           // 更新
-          this.model.update(this.model.data.id, this.model.data).then(() => {
-            window.eventHub.emit("update", JSON.parse(JSON.stringify(this.model.data)))
-          }).then(()=>{
-            this.model.data = {}
-            this.view.render(this.model.data)
-          })
+          this.model
+            .update(this.model.data.id, this.model.data)
+            .then(() => {
+              window.eventHub.emit("update", JSON.parse(JSON.stringify(this.model.data)))
+            })
+            .then(() => {
+              this.model.data = {}
+              this.view.render(this.model.data)
+            })
         } else {
           //新建
           this.model.createClass("Song", data).then(() => {
@@ -101,13 +106,13 @@
           })
         }
       })
-      window.eventHub.on("getSongInfo", (data) => {
-        this.model.data = data
-        this.view.render(this.model.data)
-      })
       window.eventHub.on("selected", (data) => {
         this.model.data = data
-        this.view.render(this.model.data)
+        this.view.render(this.model.data)                             
+      })
+      window.eventHub.on("getSongInfo", (data) => {
+        this.model.data = data
+        this.view.render(this.model.data)                             
       })
     },
   }

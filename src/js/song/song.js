@@ -10,6 +10,7 @@
       </div>
     </header>
     <div class="song-disc">
+      <div class='needle pause'></div>
       <div class="roll-wrap">
         <div class="light"></div>
         <div class="song-image">
@@ -44,63 +45,7 @@
   let model = {
     data: {
       song_url: "",
-      lyrics: `
-    [00:15.20]许嵩
-    [00:21.00]
-    [00:22.80]天空好像下雨
-    [00:25.42]我好想住你隔壁
-    [00:27.48]傻站在你家楼下
-    [00:29.76]抬起头 数乌云
-    [00:32.19]如果场景里出现一架钢琴
-    [00:34.43]我会唱歌给你听
-    [00:36.53]哪怕好多盆水往下淋
-    [00:41.52]夏天快要过去
-    [00:44.02]请你少买冰淇淋
-    [00:46.44]天凉就别穿短裙
-    [00:48.75]别再那么淘气
-    [00:51.06]如果有时不那么开心
-    [00:53.28]我愿意将格洛米借给你
-    [00:55.63]你其实明白我心意
-    [00:59.11]为你唱这首歌 没有什么风格
-    [01:03.47]它仅仅代表着 我想给你快乐
-    [01:08.20]为你解冻冰河 为你做一只扑火的飞蛾
-    [01:14.11]没有什么事情是不值得
-    [01:17.97]为你唱这首歌 没有什么风格
-    [01:22.44]它仅仅代表着 我希望你快乐
-    [01:27.12]为你辗转反侧 为你放弃世界有何不可
-    [01:33.01]夏末秋凉里带一点温热 有换季的颜色
-    [01:38.94]
-    [01:53.43]
-    [01:57.55]天空好像下雨
-    [02:00.25]我好想住你隔壁
-    [02:02.43]傻站在你家楼下
-    [02:04.57]抬起头 数乌云
-    [02:07.07]如果场景里出现一架钢琴
-    [02:09.32]我会唱歌给你听
-    [02:11.55]哪怕多盆水往下淋 往下淋 往下淋
-    [02:16.11]夏天快要过去
-    [02:19.15]请你少买冰淇淋
-    [02:21.33]天凉就别穿短裙
-    [02:23.74]别再那么淘气
-    [02:25.90]如果有时不那么开心
-    [02:28.10]我愿意将格洛米借给你
-    [02:30.72]你其实明白我心意
-    [02:34.19]为你唱这首歌 没有什么风格
-    [02:38.41]它仅仅代表着 我想给你快乐
-    [02:43.40]为你解冻冰河 为你做一只扑火的飞蛾
-    [02:49.06]没有什么事情是不值得
-    [02:53.04]为你唱这首歌 没有什么风格
-    [02:57.52]它仅仅代表着 我希望你快乐
-    [03:02.12]为你辗转反侧 为你放弃世界有何不可
-    [03:08.37]夏末秋凉里带一点温热 有换季的颜色
-    [03:12.34]
-    [03:21.69]为你解冻冰河 为你做一只扑火的飞蛾
-    [03:27.28]没有什么事情是不值得
-    [03:31.23]为你唱这首歌 没有什么风格
-    [03:35.77]它仅仅代表着 我希望你快乐
-    [03:40.57]为你辗转反侧 为你放弃世界有何不可
-    [03:45.93]夏末秋凉里带一点温热 有换季的颜色
-      `,
+      lyric: ``,
     },
     getSong() {
       let id = decodeURIComponent(document.location.search.match(/id\=(.+)/)[1])
@@ -119,7 +64,7 @@
       this.view.init()
       this.model.getSong().then(() => {
         this.view.render(this.model.data)
-        this.getLyrics(this.model.data.lyrics)
+        this.getLyrics(this.model.data.lyric)
         this.bindEvents()
       })
     },
@@ -135,6 +80,7 @@
           }
         } else {
           $("audio")[0].pause()
+          $('.needle').addClass('pause')
           $(".play-btn").removeClass("hidden")
           $(".roll-wrap").css("animation-play-state", "paused")
         }
@@ -143,6 +89,7 @@
         .on("play", (e) => {
           $(".play-btn").addClass("hidden")
           $(".roll-wrap").addClass("rotate")
+          $('.needle').removeClass('pause')
           // e.currentTarget.playbackRate = 10
         })
         .on("ended", () => {
@@ -152,7 +99,7 @@
         })
         .on("timeupdate", (e) => {
           let ct = e.currentTarget.currentTime + 0.8
-          let [p,height] = [$(".lyric-move p"),$(".lyric-move p").height()]
+          let [p, height] = [$(".lyric-move p"), $(".lyric-move p").height()]
           for (let i = 0; i < p.length; i++) {
             let curTime = parseFloat($(p[i]).attr("data-time"), 10)
             let nextTime = parseFloat($(p[i + 1]).attr("data-time"), 10)
@@ -166,20 +113,25 @@
     getLyrics(data) {
       let arr = data.trim().split("\n")
       arr.forEach((txt) => {
-        let [key, value] = [txt.trim().match(/\[((?:\d+[:\.]?)+)\]/)[1], txt.trim().match(/\[(?:\d+[:\.]?)+\](.*)/)[1]]
-        let temp = key.split(":")
-        value &&
-          $("<p>")
-            .text(value)
-            .appendTo($(".lyric-move"))
-            .attr("data-time", (temp[0] - 0) * 60 + (temp[1] - 0))
+        if (txt.trim()) {
+          let [key, value] = [
+            txt.trim().match(/\[((?:\d+[:\.]?)+)\]/)[1],
+            txt.trim().match(/\[(?:\d+[:\.]?)+\](.*)/)[1],
+          ]
+          let temp = key.split(":")
+          value &&
+            $("<p>")
+              .text(value)
+              .appendTo($(".lyric-move"))
+              .attr("data-time", (temp[0] - 0) * 60 + (temp[1] - 0))
+        }
       })
     },
     lyricReset() {
       $(".lyric-move").css("transform", `translateY(0px)`)
     },
     goToLyricLine(num) {
-      let [p,height] = [$(".lyric-move p"),$(".lyric-move p").height()]
+      let [p, height] = [$(".lyric-move p"), $(".lyric-move p").height()]
       num <= 1 || $(".lyric-move").css("transform", `translateY(${-(num - 1) * height}px)`)
       $(p[num]).addClass("active").siblings().removeClass("active")
     },

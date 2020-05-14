@@ -24,10 +24,10 @@
         for (let i = 0; i < this.files.length; i++) {
           let file = new AV.File(this.files[i].name, this.files[i])
           $(".text").text("上传进行中...")
-          file.save().then(({ attributes: { url, name } }) => {
+          file.save().then(({ attributes: { url, name} }) => {
             window.eventHub.emit("getSongInfo", {
-              song_url: url,
-              song_name: name,
+              "song_url": url,
+              "song_name": name,
             })
             count++
             if (count === this.files.length) {

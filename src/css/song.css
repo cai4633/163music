@@ -36,6 +36,22 @@ body .playSong .rotate {
 body .playSong .song-disc {
   position: relative;
 }
+body .playSong .song-disc .needle {
+  position: fixed;
+  z-index: 9;
+  height: 137px;
+  width: 96px;
+  top: 0;
+  left: 50%;
+  margin-left: -23px;
+  background-image: url("//s3.music.126.net/mobile-new/img/needle-ip6.png?be4ebbeb6befadfcae75ce174e7db862=");
+  background-size: contain;
+  transition: all 0.5s linear;
+  transform-origin: left top;
+}
+body .playSong .song-disc .needle.pause {
+  transform: rotate(-18deg);
+}
 body .playSong .song-disc .roll-wrap {
   position: relative;
   width: 296px;
