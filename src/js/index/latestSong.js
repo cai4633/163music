@@ -59,7 +59,7 @@
     },
     bindEvent(){
       this.view.$el.find('ul li').on('click',(e)=>{
-        let url= document.URL.replace(/\/(?:index.html)?$/,'/song.html?id=')
+        let url= document.URL.replace(/\/?(?:index.html)?(?:\?.+)?$/,'/song.html?id=')
         url += encodeURIComponent($(e.currentTarget).attr('data-id'))
         window.open(url,'_self')
       })
