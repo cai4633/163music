@@ -14,6 +14,12 @@
         <label for="singer">歌手</label><input id="singer" type="text" value='__singer__' required='required'>
       </div>
       <div class="row">
+        <label for="cover">封面</label><input id="cover" type="text" value='__cover__' required='required'>
+      </div>
+      <div class="row">
+        <label for="background">背景</label><input id="background" type="text" value='__background__' required='required'>
+      </div>
+      <div class="row">
         <label for="song_url">外链</label><input id="song_url" type="text" value='__song_url__' required='required'>
         <label for="163_url" class='outer-url'>网易云外链</label><input id="outer-url" type="checkbox" checked value='outer-url'>
       </div>
@@ -25,21 +31,20 @@
       </div>
     </form>
   `,
-    render(data = {}) {
-      let [placeholder, html] = [["song_name", "singer", "song_url", "lyric"], this.template]
-      placeholder.forEach((str) => (html = html.replace(`__${str}__`, data[str] || "")))
-      if (data.id) {
-        html = html.replace("新建歌曲", "编辑歌曲")
-      }
+    render(data = {}, words = []) {
+      let html = this.template
+      words.forEach((str) => (html = html.replace(`__${str}__`, data[str] || "")))
+      if (data.id) { html = html.replace("新建歌曲", "编辑歌曲") }
       $(this.el).html(html)
     },
-    reset() {
-      this.render({})
+    reset(words=[]) {
+      this.render({},words)
     },
   }
 
   let model = {
     data: {},
+    words: ["song_name", "singer", "song_url", "lyric", "cover", "background"],
     createClass(className, obj) {
       const TestObject = AV.Object.extend(className)
       const testObject = new TestObject()
@@ -57,11 +62,12 @@
     },
     update(id, obj) {
       const song = AV.Object.createWithoutData("Song", id)
-      let str = ["song_name", "song_url", "singer","lyric"]
-      str.forEach((key) => {
+      this.words.forEach((key) => {
         song.set(key, obj[key])
       })
-      return song.save().then(() => {})
+      return song.save().then(() => {
+
+      })
     },
   }
 
@@ -69,7 +75,7 @@
     init(view, model) {
       Object.assign(this, { view, model })
       this.view.init()
-      this.view.render(this.model.data)
+      this.view.render(this.model.data,this.model.words)
       this.bindEvents()
     },
     getOuterUrl(url) {
@@ -78,8 +84,8 @@
     bindEvents() {
       this.view.$el.on("submit", "form", (e) => {
         e.preventDefault()
-        let [strs, data] = [["song_name", "song_url", "singer", 'lyric'], {}]
-        strs.forEach((str) => {
+        let data = {}
+        this.model.words.forEach((str) => {
           data[str] = $(`#${str}`).val()
         })
         if ($("#outer-url").prop("checked")) {
@@ -96,23 +102,23 @@
             })
             .then(() => {
               this.model.data = {}
-              this.view.render(this.model.data)
+              this.view.render(this.model.data,this.model.words)
             })
         } else {
           //新建
           this.model.createClass("Song", data).then(() => {
-            this.view.reset()
+            this.view.reset(this.model.words)
             window.eventHub.emit("new", this.model.data)
           })
         }
       })
       window.eventHub.on("selected", (data) => {
         this.model.data = data
-        this.view.render(this.model.data)                             
+        this.view.render(this.model.data,this.model.words)
       })
       window.eventHub.on("getSongInfo", (data) => {
         this.model.data = data
-        this.view.render(this.model.data)                             
+        this.view.render(this.model.data,this.model.words)
       })
     },
   }

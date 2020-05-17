@@ -1,14 +1,16 @@
 body
   width 100vw
   height 100vh
+
   header
     color #333
     background-color rgb(212, 60, 51)
     padding 24px 10px
     position fixed
-    top 0 
+    top 0
     left 0
     width 100vw
+
     .logo
       float left
       margin-top 5px
@@ -38,8 +40,9 @@ body
     background-color #fff
     position fixed
     width 100vw
-    top 84px 
+    top 84px
     left 0
+
     ul
       display flex
       flex-wrap nowrap
@@ -74,23 +77,28 @@ body
           span
             display inline-block
             line-height 2.67
+
   .tab-content
     margin-top 124px
     .page-1
       display none
+
       &.active
         display block
-      
+
       footer
         background-image url('//s3.music.126.net/mobile-new/img/recommand_bg_3x.png?f3a9aaa781c3bf3b543d129327d35fce=')
         background-size cover
         text-align center
         padding-bottom 20px
+
         .logo
           padding-top 64px
-          svg 
+
+          svg
             margin 0 43px
             height 44px
+
         .openApp
           color red
           font-size 16px
@@ -163,15 +171,15 @@ body
 
             .text
               line-height 1.48
+
               span.sq
                 display inline-block
                 vertical-align top
-                width 12px           
+                width 12px
                 height 8px
                 vertical-align baseline
                 background-image url('//s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880=')
                 background-size 166px 97px
-
 
               span.details
                 display inline-block
@@ -193,12 +201,43 @@ body
               width 22px
               height 22px
               vertical-align middle
+
     .page-2
       display none
+
       &.active
         display block
+
     .page-3
       display none
+
       &.active
         display block
+        border-top 1px solid transparent
+        
+        .search-wrapper
+          margin-top 25px
+          margin-left 10px
+          margin-right 10px
+          border-radius 30px
+          display flex
+          font-size 16px
+          background-color #ebecec
+          padding 5px
+          i 
+            margin 0 8px
+            svg 
+              width 16px
+              height 16px
+
+          input 
+            background-color inherit
+            border none
+            padding-left 5px
+            font-size: inherit;
+            flex: 1;
+            outline: none;
+            border-radius: 30px;
+            margin-right: 12px;
+
 

@@ -14,7 +14,7 @@
       <div class="roll-wrap">
         <div class="light"></div>
         <div class="song-image">
-          <img src="http://p1.music.126.net/rFUKVdOjqxgwAT6Zi6qv7A==/109951164906689206.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0" alt="">
+          <img src="{{cover}}" alt="">
         </div>
       </div>
       <button class="play-btn">
@@ -32,17 +32,18 @@
       this.$el = $(this.el)
       $(() => {})
     },
-    render(data) {
-      let keys = ["song_url", "song_name"]
+    render(data,words=[]) {
       let html = this.template
-      keys.forEach((key) => {
+      words.forEach((key) => {
         html = html.replace(`{{${key}}}`, data[key] || "")
       })
       this.$el.html(html)
+      $('body').css('background-image',`url(${data['background']})`)
     },
   }
 
   let model = {
+    words:["song_url", "song_name", "cover"],
     data: {
       song_url: "",
       lyric: ``,
@@ -63,7 +64,7 @@
       this.model = model
       this.view.init()
       this.model.getSong().then(() => {
-        this.view.render(this.model.data)
+        this.view.render(this.model.data,this.model.words)
         this.getLyrics(this.model.data.lyric)
         this.bindEvents()
       })
@@ -80,7 +81,7 @@
           }
         } else {
           $("audio")[0].pause()
-          $('.needle').addClass('pause')
+          $(".needle").addClass("pause")
           $(".play-btn").removeClass("hidden")
           $(".roll-wrap").css("animation-play-state", "paused")
         }
@@ -89,7 +90,7 @@
         .on("play", (e) => {
           $(".play-btn").addClass("hidden")
           $(".roll-wrap").addClass("rotate")
-          $('.needle').removeClass('pause')
+          $(".needle").removeClass("pause")
           // e.currentTarget.playbackRate = 10
         })
         .on("ended", () => {
@@ -114,10 +115,8 @@
       let arr = data.trim().split("\n")
       arr.forEach((txt) => {
         if (txt.trim()) {
-          let [key, value] = [
-            txt.trim().match(/\[((?:\d+[:\.]?)+)\]/)[1],
-            txt.trim().match(/\[(?:\d+[:\.]?)+\](.*)/)[1],
-          ]
+          let [t, l] = [txt.trim().match(/\[((?:\d+[:\.]?)+)\]/), txt.trim().match(/\[(?:\d+[:\.]?)+\](.*)/)]
+          let [key, value] = [t ? t[1] : "", l ? l[1] : ""]
           let temp = key.split(":")
           value &&
             $("<p>")

@@ -2,7 +2,7 @@
   let view = {
     el: '.tab-content .page-3',
     init(){this.$el = $(this.el)}, 
-    template: `page-3`,
+    template: `<div class='search-wrapper'><i><svg class="icon" aria-hidden="true"> <use xlink:href="#icon-search"></use> </svg></i><input type='search' placeholder='搜索歌曲'></div> `,
     render(data){
       this.$el.html(this.template)
     },
