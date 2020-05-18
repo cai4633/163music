@@ -1,29 +1,29 @@
 {
     let view = {
-        el: ".latest-song",
+        el: ".songlist",
         init() {
             this.$el = $(this.el)
         },
-        template: `
-    <h1>最新音乐</h1>
-    <ul>{{contents}}</ul>
-  `,
-        li: `
-    <li data-id='{{id}}'>
+        template: ` <ul>{{contents}}</ul> `,
+        li: ` <li data-id="{{id}}">
     <div class="left">
-      <h2>{{song_name}}</h2>
-      <div class="text"><span class='sq'></span><span class="details">{{singer}}-{{song_name}}</span></div>
+        <span class="index">{{index}}</span>
+    </div>
+    <div class="mid">
+        <h3>{{song_name}}</h3>
+        <div class="text"><span class="sq"></span><span class="details">{{singer}}-{{song_name}}</span></div>
     </div>
     <div class="right">
-      <span class="play"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pl-play"></use></svg></span>
+        <span class="play"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pl-play"></use></svg></span>
     </div>
-  </li>`,
+</li>`,
         render(data) {
             let songs = data.songs
-            let keys = ["song_name", "singer", "id"]
+            let keys = ["song_name", "singer", "id", "index"]
             let texts = []
-            songs.forEach((song) => {
+            songs.forEach((song, index) => {
                 let text = this.li
+                Object.assign(song, { index: index + 1 })
                 keys.forEach((str) => {
                     text = text.replace(new RegExp(`{{${str}}}`, "g"), song[`${str}`])
                 })
@@ -50,14 +50,13 @@
             this.model = model
             this.view.init()
             this.model.getAllList().then(() => {
-                console.log(this.model.data)
                 this.view.render(this.model.data)
                 this.bindEvent()
             })
         },
         bindEvent() {
             this.view.$el.find("ul li").on("click", (e) => {
-                let url = document.URL.replace(/\/?(?:index.html)?(?:\?.+)?$/, "/song.html?id=")
+                let url = document.URL.replace(/\/?(?:playlist.html)?(?:\?.+)?$/, "/song.html?id=")
                 url += encodeURIComponent($(e.currentTarget).attr("data-id"))
                 window.open(url, "_self")
             })

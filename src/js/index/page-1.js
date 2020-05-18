@@ -34,6 +34,7 @@
       this.view.render(this.model.data)
       window.eventHub.on('tab-switch',(data)=>{
         $('.tab-content').children().removeClass('active').end().find(`.${data}`).addClass('active')
+        window.scrollTo(0,0)    //点击后默认位置为(0,0)
       })
     },
   }

@@ -1,0 +1,152 @@
+body
+    .icon
+        width 1em
+        height 1em
+        vertical-align -0.15em
+        fill currentColor
+        overflow hidden
+
+    header
+        position relative
+        background-size cover
+        padding 30px 15px
+        color #fff
+        z-index 0
+        overflow hidden
+
+        &::before
+            position absolute
+            content ''
+            display block
+            top 0
+            bottom 0px
+            right 0
+            left 0
+            background-image url('//music.163.com/api/img/blur/109951164627748689?param=170y170')
+            background-position center center
+            filter blur(20px)
+            z-index -1
+
+        &::after
+            position absolute
+            content ''
+            display block
+            top 0
+            bottom 0px
+            right 0
+            left 0
+            background-color rgba(0, 0, 0, 0.4)
+            z-index -1
+
+        .plhead-wrap
+            display flex
+
+            .banner
+                position relative
+
+                img
+                    display block
+                    width 130px
+                    height @width
+                    border 1px solid #000
+
+                .lshd-icon
+                    position absolute
+                    top 10px
+                    left 0
+                    font-size 9px
+                    background-color #b22627
+                    border-top-right-radius 20px
+                    border-bottom-right-radius 20px
+                    padding 0px 8px
+                    height 17px
+                    line-height 17px
+
+            .text
+                margin-left 15px
+
+                h1
+                    font-size 16px
+                    font-weight normal
+                    margin-bottom 20px
+
+                .uploader-wrap
+                    display flex
+                    align-items center
+
+                    .u-avatar
+                        img
+                            vertical-align top
+                            border-radius 50%
+                            width 30px
+                            height @width
+
+                    .uploader
+                        color rgb(196, 171, 153)
+                        margin-left 5px
+                        font-size 14px
+
+    .description
+        color #666
+        padding 10px 10px 0 15px
+
+        .tag-wrap
+            font-size 14px
+
+            .tag
+                border 1px solid #f0f0f0
+                font-size 12px
+                border-radius 30px
+                padding 2px 10px
+
+        .desc-wrap
+            margin-top 15px
+            font-size 14px
+
+    main
+        margin-top 30px
+        color #666
+
+        h2
+            background-color #eeeff0
+            font-size 12px
+            padding 2px 10px
+            font-weight normal
+
+        .songlist-wrap
+            ul.songlist
+                li
+                    display flex
+
+                .left
+                    font-size 16px
+                    display flex
+                    justify-content: center
+                    align-items: center
+                    padding 0 15px
+                    .index
+                        color #666666
+
+                .mid
+                    flex 1
+                    padding 6px 0
+                    line-height: 1.5
+                    h3
+                        font-size 17px
+                        color: #333
+                        font-weight 500
+
+                    .text
+                        color #888
+
+                .right
+                    display flex
+                    justify-content: center
+                    align-items: center
+                    .play
+                        display block
+                        padding: 0 10px
+                        svg
+                            width 22px
+                            height @width
+                            fill #aaaaaa
