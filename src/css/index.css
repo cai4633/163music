@@ -126,6 +126,7 @@ body .tab-content .page-1 section.recommendSong ul {
 }
 body .tab-content .page-1 section.recommendSong ul li {
   flex: 1 1 30%;
+  max-width: 33.3%;
   padding: 1px;
   box-sizing: border-box;
   vertical-align: top;
@@ -136,8 +137,16 @@ body .tab-content .page-1 section.recommendSong ul li img {
 }
 body .tab-content .page-1 section.recommendSong ul li p {
   padding: 6px 2px 0 6px;
+  color: #333;
   text-align: left;
   font-size: 13px;
+  line-height: 1.2;
+  height: 2.4em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 body .tab-content .page-1 .latest-song h1 {
   font-weight: normal;

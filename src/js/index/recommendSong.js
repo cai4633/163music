@@ -1,74 +1,60 @@
 {
-  let view = {
-    el: '.recommendSong',
-    init(){this.$el = $(this.el)}, 
-    template: `
-    <h1>推荐歌单</h1>
-    <ul>
-      <li>
-        <img
-          src="http://p2.music.126.net/XjacbkhYbe21hgmdi4ihrA==/109951164829619895.jpg?imageView=1&type=webp&thumbnail=370x0"
-          alt=""
-          width="100%"
-        />
-        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
-      </li>
-      <li>
-        <img
-          src="http://p2.music.126.net/XjacbkhYbe21hgmdi4ihrA==/109951164829619895.jpg?imageView=1&type=webp&thumbnail=370x0"
-          alt=""
-          width="100%"
-        />
-        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
-      </li>
-      <li>
-        <img
-          src="http://p2.music.126.net/XjacbkhYbe21hgmdi4ihrA==/109951164829619895.jpg?imageView=1&type=webp&thumbnail=370x0"
-          alt=""
-          width="100%"
-        />
-        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
-      </li>
-      <li>
-        <img
-          src="http://p2.music.126.net/XjacbkhYbe21hgmdi4ihrA==/109951164829619895.jpg?imageView=1&type=webp&thumbnail=370x0"
-          alt=""
-          width="100%"
-        />
-        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
-      </li>
-      <li>
-        <img
-          src="http://p2.music.126.net/XjacbkhYbe21hgmdi4ihrA==/109951164829619895.jpg?imageView=1&type=webp&thumbnail=370x0"
-          alt=""
-          width="100%"
-        />
-        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
-      </li>
-      <li>
-        <img
-          src="http://p2.music.126.net/XjacbkhYbe21hgmdi4ihrA==/109951164829619895.jpg?imageView=1&type=webp&thumbnail=370x0"
-          alt=""
-          width="100%"
-        />
-        <p class="descrition">『欧美』 让歌声带着星光， 与梦相随</p>
-      </li>
-    </ul>
-  
-    `,
-    render(data){
-      this.$el.html(this.template)
+    let view = {
+        el: ".recommendLists",
+        template: `
+        <li data-id='{{id}}'><a><img src="{{cover}}" alt="cover image" width="100%" /> <p class="descrition">{{name}}</p></a></li>
+      `,
+        init() {
+            this.$el = $(this.el)
+        },
+        render(data = { lists: [] }, words = []) {
+            data["lists"].forEach((list) => {
+                let li = this.template
+                words.forEach((word) => {
+                    li = li.replace(`{{${word}}}`, list[word])
+                })
+                $(li).appendTo(this.$el)
+            })
+        },
     }
-  }
-  let model = {}
-  let controller = {
-    init(view, model){
-      this.view = view
-      this.model = model
-      this.view.init()
-      this.view.render(this.model.data)
-
+    let model = {
+        data: { lists: [] },
+        words: ["name", "cover", "id"],
+        getRecommendLists() {
+            const query = new AV.Query("playList")
+            return query.find().then((lists) => {
+                const set = this.getSixRondom(lists)
+                set.forEach((list) => {
+                    this.data.lists.push({ id: list.id, ...list.attributes })
+                })
+            })
+        },
+        getSixRondom(array = []) {
+            const length = 6
+            let set = new Set()
+            let result = []
+            while (set.size < length) {
+                set.add(array[Math.floor(Math.random() * array.length)])
+            }
+            return Array.from(set)  		
+        },
     }
-  }
-  controller.init(view, model)
+    let controller = {
+        init(view, model) {
+            this.view = view
+            this.view.init()
+            this.model = model
+            this.model.getRecommendLists().then(() => {
+				this.view.render(this.model.data, this.model.words)
+            })
+            this.bindEvents()
+        },
+        bindEvents(){
+			this.view.$el.on('click','li',(e)=>{
+				let url = document.URL.replace(/\/?(?:index.html)?(?:\?.+)?$/, "/playlist.html?id=") + encodeURIComponent($(e.currentTarget).attr("data-id"))
+                window.open(url, "_self")
+			})
+        }
+    }
+    controller.init(view, model)
 }

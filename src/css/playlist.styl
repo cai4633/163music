@@ -14,12 +14,11 @@ body
         z-index 0
         overflow hidden
 
-        &::before
+        .hd-bg
             position absolute
-            content ''
             display block
             top 0
-            bottom 0px
+            bottom 0
             right 0
             left 0
             background-image url('//music.163.com/api/img/blur/109951164627748689?param=170y170')
@@ -66,9 +65,16 @@ body
                 margin-left 15px
 
                 h1
-                    font-size 16px
+                    font-size 17px
                     font-weight normal
                     margin-bottom 20px
+                    line-height 1.3
+                    display -webkit-box
+                    height 2.6em
+                    -webkit-box-orient vertical
+                    -webkit-line-clamp 2
+                    overflow hidden
+                    text-overflow ellipsis
 
                 .uploader-wrap
                     display flex
@@ -121,19 +127,21 @@ body
                 .left
                     font-size 16px
                     display flex
-                    justify-content: center
-                    align-items: center
+                    justify-content center
+                    align-items center
                     padding 0 15px
+
                     .index
                         color #666666
 
                 .mid
                     flex 1
                     padding 6px 0
-                    line-height: 1.5
+                    line-height 1.5
+
                     h3
                         font-size 17px
-                        color: #333
+                        color #333
                         font-weight 500
 
                     .text
@@ -141,11 +149,13 @@ body
 
                 .right
                     display flex
-                    justify-content: center
-                    align-items: center
+                    justify-content center
+                    align-items center
+
                     .play
                         display block
-                        padding: 0 10px
+                        padding 0 10px
+
                         svg
                             width 22px
                             height @width

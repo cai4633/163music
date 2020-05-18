@@ -50,7 +50,6 @@
             this.model = model
             this.view.init()
             this.model.getAllList().then(() => {
-                console.log(this.model.data)
                 this.view.render(this.model.data)
                 this.bindEvent()
             })

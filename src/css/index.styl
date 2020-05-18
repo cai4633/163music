@@ -80,6 +80,7 @@ body
 
   .tab-content
     margin-top 124px
+
     .page-1
       display none
 
@@ -126,6 +127,7 @@ body
 
           li
             flex 1 1 30%
+            max-width 33.3%
             padding 1px
             box-sizing border-box
             vertical-align top
@@ -136,8 +138,16 @@ body
 
             p
               padding 6px 2px 0 6px
+              color #333
               text-align left
               font-size 13px
+              line-height 1.2
+              height 2.4em
+              display -webkit-box
+              -webkit-box-orient vertical
+              -webkit-line-clamp 2
+              overflow hidden
+              text-overflow ellipsis
 
       .latest-song
         h1
@@ -214,7 +224,7 @@ body
       &.active
         display block
         border-top 1px solid transparent
-        
+
         .search-wrapper
           margin-top 25px
           margin-left 10px
@@ -224,20 +234,20 @@ body
           font-size 16px
           background-color #ebecec
           padding 5px
-          i 
+
+          i
             margin 0 8px
-            svg 
+
+            svg
               width 16px
               height 16px
 
-          input 
+          input
             background-color inherit
             border none
             padding-left 5px
-            font-size: inherit;
-            flex: 1;
-            outline: none;
-            border-radius: 30px;
-            margin-right: 12px;
-
-
+            font-size inherit
+            flex 1
+            outline none
+            border-radius 30px
+            margin-right 12px
