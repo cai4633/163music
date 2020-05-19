@@ -25,9 +25,23 @@
             return query.find().then((lists) => {
                 const set = this.getSixRondom(lists)
                 set.forEach((list) => {
+                    this.imageFormat(list.attributes,['cover','avatar'])
                     this.data.lists.push({ id: list.id, ...list.attributes })
                 })
+                console.log(this.data.lists);
+                
             })
+        },
+        imageFormat(data, keys = []) {
+            if (!this.hasWebp()) {
+                keys.forEach((key) => {
+                    data[key] = data[key].replace("&type=webp", "")
+                })
+            }
+        },
+        hasWebp() {
+            //检测客户端是否支持webp格式
+            return !!document.createElement("canvas").toDataURL("image/webp", 0.2).match("data:image/webp")
         },
         getSixRondom(array = []) {
             const length = 6
@@ -36,7 +50,7 @@
             while (set.size < length) {
                 set.add(array[Math.floor(Math.random() * array.length)])
             }
-            return Array.from(set)  		
+            return Array.from(set)
         },
     }
     let controller = {
@@ -45,16 +59,18 @@
             this.view.init()
             this.model = model
             this.model.getRecommendLists().then(() => {
-				this.view.render(this.model.data, this.model.words)
+                this.view.render(this.model.data, this.model.words)
             })
             this.bindEvents()
         },
-        bindEvents(){
-			this.view.$el.on('click','li',(e)=>{
-				let url = document.URL.replace(/\/?(?:index.html)?(?:\?.+)?$/, "/playlist.html?id=") + encodeURIComponent($(e.currentTarget).attr("data-id"))
+        bindEvents() {
+            this.view.$el.on("click", "li", (e) => {
+                let url =
+                    document.URL.replace(/\/?(?:index.html)?(?:\?.+)?$/, "/playlist.html?id=") +
+                    encodeURIComponent($(e.currentTarget).attr("data-id"))
                 window.open(url, "_self")
-			})
-        }
+            })
+        },
     }
     controller.init(view, model)
 }

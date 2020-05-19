@@ -52,17 +52,29 @@
             return query.get(id).then((todo) => {
                 todo = todo.toJSON()
                 Object.assign(this.data, todo)
-                this.splitTags()
+                this.splitTags(this.data)
+                this.imageFormat(this.data, ["cover", "avatar"])
             })
         },
-        splitTags() {
+        splitTags(data) {
             let tags = ""
-            if (this.data["tag"]) {
-                this.data["tag"].split(" ").forEach((tag) => {
+            if (data["tag"]) {
+                data["tag"].split(" ").forEach((tag) => {
                     tags += `<span class="tag">${tag}</span>`
                 })
             }
-            this.data["tag"] = tags
+            data["tag"] = tags
+        },
+        imageFormat(data, keys = []) {
+            if (!this.hasWebp()) {
+                keys.forEach((key) => {
+                    data[key] = data[key].replace("&type=webp", "")
+                })
+            }
+        },
+        hasWebp() {
+            //检测客户端是否支持webp格式
+            return !!document.createElement("canvas").toDataURL("image/webp", 0.2).match("data:image/webp")
         },
     }
     let controller = {
@@ -72,6 +84,7 @@
             this.model.getPlayList().then(() => {
                 this.view.render(this.model.data, this.model.words)
             })
+            this.bindEvents()
         },
         bindEvents() {},
     }
