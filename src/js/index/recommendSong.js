@@ -28,8 +28,6 @@
                     this.imageFormat(list.attributes,['cover','avatar'])
                     this.data.lists.push({ id: list.id, ...list.attributes })
                 })
-                console.log(this.data.lists);
-                
             })
         },
         imageFormat(data, keys = []) {

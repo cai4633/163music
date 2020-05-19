@@ -11,13 +11,11 @@
         render(data = { songs: [] }) {
             let { songs, selectedID } = data
             let domLis = songs.map((song, index) => {
-                let li = $("<li>").text(song["name"])
-                if (index === selectedID) {
-                    li.addClass("active")
-                }
+                let li = $("<li>").text(song["name"]).attr('data-id',song.id)
+                index === selectedID && li.addClass("active")
                 return li
             })
-            $(this.el).html(this.template)
+            this.$el.html(this.template)
             domLis.map((li) => $(this.el).find("ul").append(li))
         },
     }
@@ -49,9 +47,13 @@
         },
         bindEvents() {
             this.view.$el.on("click", "li", (e) => {
-                this.model.data.selectedID = $(e.target).index()
+                Object.assign(this.model.data, { selectedID: $(e.target).index() })
                 window.eventHub.emit("selected", this.model.data.songs[$(e.target).index()])
+                window.eventHub.emit("hide-add-song",$(e.currentTarget).attr('data-id'))
                 this.active(e.target)
+            })
+            this.view.$el.on("dblclick", "li", (e) => {
+                window.eventHub.emit("pop-add-song",$(e.currentTarget).attr('data-id'))
             })
             window.eventHub.on("getSongInfo", () => {
                 this.active(".new")
@@ -71,6 +73,7 @@
             this.view.$el.on("click", "h1.new", (e) => {
                 window.eventHub.emit("getSongInfo", {})
                 this.active(e.target)
+                window.eventHub.emit("hide-add-song",$(e.currentTarget).attr('data-id'))
             })
         },
     }

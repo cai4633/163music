@@ -1,6 +1,6 @@
 {
     let view = {
-        el: ".view main",
+        el: ".view main .newList",
         init() {
             this.$el = $(this.el)
         },
@@ -41,6 +41,12 @@
         reset(words = []) {
             this.render({}, words)
         },
+        hide(){
+            this.$el.hide()
+        },
+        show(){
+            this.$el.show()
+        }
     }
 
     let model = {
@@ -108,6 +114,12 @@
             })
             window.eventHub.on(["selected", "getSongInfo"], (data) => {
                 this.view.render((this.model.data = data), this.model.words)
+            })
+            window.eventHub.on('pop-add-song',(data)=>{
+                this.view.hide()
+            })
+            window.eventHub.on('hide-add-song',(data)=>{
+                this.view.show()
             })
         },
     }
