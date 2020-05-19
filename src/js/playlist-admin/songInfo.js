@@ -68,11 +68,11 @@
             )
         },
         update(id, obj) {
-            const song = AV.Object.createWithoutData("playList", id)
+            const list = AV.Object.createWithoutData("playList", id)
             this.words.forEach((key) => {
-                song.set(key, obj[key])
+                list.set(key, obj[key])
             })
-            return song.save().then(() => {})
+            return list.save().then(() => {})
         },
     }
 

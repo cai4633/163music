@@ -37,6 +37,9 @@
         data: { songs: [] },
         getAllList() {
             const query = new AV.Query("Song")
+            const id = document.location.search.match(/\?id=([#%\w]+)(&)?/)[1]
+            const list = AV.Object.createWithoutData("playList", id)
+            query.equalTo('list',list)
             return query.find().then((songs) => {
                 songs.forEach((song) => {
                     this.data.songs.push({ id: song.id, ...song.attributes })
