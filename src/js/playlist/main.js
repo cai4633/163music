@@ -39,6 +39,7 @@
                 html = html.replace(`{{${word}}}`, data[word] || "")
             })
             this.$el.html(html)
+            document.title = `${data.name}`
             $("div.hd-bg").css("background-image", `url(${data["cover"]})`)
         },
     }
