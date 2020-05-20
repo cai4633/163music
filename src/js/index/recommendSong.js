@@ -44,9 +44,9 @@
         getSixRondom(array = []) {
             const length = 6
             let set = new Set()
-            let result = []
             while (set.size < length) {
-                set.add(array[Math.floor(Math.random() * array.length)])
+                let list = array[Math.floor(Math.random() * array.length)]
+                if(list.id !== '5ec3e743a1988300079bbfdc') set.add(list)    //禁止最热门歌曲列表在推荐中展示
             }
             return Array.from(set)
         },

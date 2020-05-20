@@ -37,6 +37,9 @@
         data: { songs: [] },
         getAllList() {
             const query = new AV.Query("Song")
+            query.descending("createdAt")
+            // 只获取 10 条
+            query.limit(9)
             return query.find().then((songs) => {
                 songs.forEach((song) => {
                     this.data.songs.push({ id: song.id, ...song.attributes })

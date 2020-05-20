@@ -7,6 +7,7 @@ body header {
   background-color: #d43c33;
   padding: 24px 10px;
   position: fixed;
+  z-index: 3;
   top: 0;
   left: 0;
   width: 100vw;
@@ -39,6 +40,7 @@ body header .download span {
 body nav {
   background-color: #fff;
   position: fixed;
+  z-index: 3;
   width: 100vw;
   top: 84px;
   left: 0;
@@ -212,6 +214,81 @@ body .tab-content .page-1 .latest-song ul .right .play svg {
 }
 body .tab-content .page-2 {
   display: none;
+}
+body .tab-content .page-2.active .banner {
+  font-family: Helvetica, sans-serif, STHeiTi;
+  position: relative;
+  padding-left: 20px;
+  padding: 3vh 20px;
+  background-size: cover;
+  z-index: 0;
+  background-image: url("https://s3.music.126.net/mobile-new/img/hot_music_bg_3x.jpg?2bfefd3ba37eaffbd66b7d108b9de26a=");
+}
+body .tab-content .page-2.active .banner::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.2);
+  z-index: -1;
+}
+body .tab-content .page-2.active .banner h1 {
+  width: 138px;
+  height: 67px;
+  overflow: hidden;
+  background-position: -25px -30px;
+  background-repeat: no-repeat;
+  background-size: 166px;
+  background-image: url("//s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880=");
+}
+body .tab-content .page-2.active .banner p {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: normal;
+  color: rgba(255,255,255,0.8);
+}
+body .tab-content .page-2.active .hotSong li {
+  display: flex;
+}
+body .tab-content .page-2.active .hotSong .left {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+}
+body .tab-content .page-2.active .hotSong .left .index {
+  color: #666;
+}
+body .tab-content .page-2.active .hotSong .mid {
+  flex: 1;
+  padding: 6px 0;
+  line-height: 1.5;
+}
+body .tab-content .page-2.active .hotSong .mid h3 {
+  font-size: 17px;
+  color: #333;
+  font-weight: 500;
+}
+body .tab-content .page-2.active .hotSong .mid .text {
+  color: #888;
+}
+body .tab-content .page-2.active .hotSong .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .tab-content .page-2.active .hotSong .right .play {
+  display: block;
+  padding: 0 10px;
+}
+body .tab-content .page-2.active .hotSong .right .play svg {
+  width: 22px;
+  height: 22px;
+  fill: #aaa;
 }
 body .tab-content .page-2.active {
   display: block;

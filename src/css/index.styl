@@ -7,6 +7,7 @@ body
     background-color rgb(212, 60, 51)
     padding 24px 10px
     position fixed
+    z-index 3
     top 0
     left 0
     width 100vw
@@ -39,6 +40,7 @@ body
   nav
     background-color #fff
     position fixed
+    z-index 3
     width 100vw
     top 84px
     left 0
@@ -214,6 +216,83 @@ body
 
     .page-2
       display none
+
+      &.active
+        .banner
+          font-family Helvetica, sans-serif, STHeiTi
+          position relative
+          padding-left 20px
+          padding 3vh 20px
+          background-size cover
+          z-index 0
+          background-image url('https://s3.music.126.net/mobile-new/img/hot_music_bg_3x.jpg?2bfefd3ba37eaffbd66b7d108b9de26a=')
+
+          &::after
+            content ''
+            display block
+            position absolute
+            top 0
+            bottom 0
+            left 0
+            right 0
+            background-color rgba(0, 0, 0, 0.2)
+            z-index -1
+
+          h1
+            width 138px
+            height 67px
+            overflow hidden
+            background-position -25px -30px
+            background-repeat no-repeat
+            background-size 166px
+            background-image url('//s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880=')
+
+          p
+            margin-top 10px
+            font-size 12px
+            font-weight normal
+            color rgba(255, 255, 255, 0.8)
+
+        .hotSong
+          li
+            display flex
+
+          .left
+            font-size 16px
+            display flex
+            justify-content center
+            align-items center
+            padding 0 12px
+
+            .index
+              color #666666
+
+          .mid
+            flex 1
+            padding 6px 0
+            line-height 1.5
+
+            h3
+              font-size 17px
+              color #333
+              font-weight 500
+
+            .text
+              color #888
+
+          .right
+            display flex
+            justify-content center
+            align-items center
+
+            .play
+              display block
+              padding 0 10px
+
+              svg
+                width 22px
+                height @width
+                fill #aaaaaa
 
       &.active
         display block

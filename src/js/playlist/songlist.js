@@ -35,7 +35,7 @@
     }
     let model = {
         data: { songs: [] },
-        getAllList() {
+        getSongsFromList() {
             const query = new AV.Query("Song")
             const id = document.location.search.match(/\?id=([#%\w]+)(&)?/)[1]
             const list = AV.Object.createWithoutData("playList", id)
@@ -52,7 +52,7 @@
             this.view = view
             this.model = model
             this.view.init()
-            this.model.getAllList().then(() => {
+            this.model.getSongsFromList().then(() => {
                 this.view.render(this.model.data)
                 this.bindEvent()
             })
