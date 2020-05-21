@@ -1,16 +1,19 @@
 body
+  width 100vw
+  height 100vh
+  background-image url('https://p4.music.126.net/66ewnuFNHla7YJWt7zT8nw==/109951164922923585.jpg')
+  background-color #fff
+  -o-background-size cover
+  -moz-background-size cover
+  -webkit-background-size cover
+  background-repeat no-repeat
+
   .icon
     width 1em
     height 1em
     vertical-align -0.15em
     fill currentColor
     overflow hidden
-  width 100vw
-  height 100vh
-  background-color #fff
-  background-size cover
-  background-repeat no-repeat
-  background-image url('https://p4.music.126.net/66ewnuFNHla7YJWt7zT8nw==/109951164922923585.jpg')
 
   .playSong
     height 100vh
@@ -21,126 +24,144 @@ body
       bottom 0
       left 0
       right 0
-      background-color rgba(0, 0, 0, 0.5)
       z-index -1
+      -o-background-size cover
+      -moz-background-size cover
+      -webkit-background-size cover
+      background-repeat no-repeat
 
-    .logo
-      svg
-        margin 12px 0 0 10px
-        width 92px
-        height 17px
-
-    .rotate
-      animation rollDesc 15s infinite linear
-
-    @keyframes rollDesc
-      0%
-        transform rotate(0deg)
-
-      100%
-        transform rotate(360deg)
-
-    .song-disc
-      position relative
-      .needle
-        position fixed
-        z-index 9
-        height 137px
-        width 96px
-        top 0 
-        left 50%
-        margin-left @width*(-0.5)+25
-        background-image url('//s3.music.126.net/mobile-new/img/needle-ip6.png?be4ebbeb6befadfcae75ce174e7db862=')
-        background-size contain
-        transition all 0.5s linear
-        transform-origin left top
-        &.pause
-          transform rotate(-18deg)
-
-      .roll-wrap
-        position relative
-        width 296px
-        height @width
-        margin 35px auto 0px
-        &::before
-          content ''
-          position absolute
-          top 0
-          bottom 0
-          left 0
-          right 0
-          background url('http://s3.music.126.net/mobile-new/img/disc.png?d3bdd1080a72129346aa0b4b4964b75f=') no-repeat
-          background-size cover
-        .light
-          background-image url('https://s3.music.126.net/mobile-new/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577=')
-          position absolute
-          top 0
-          bottom 0
-          left 0
-          right 0
-          background-size cover
-
-        .song-image
-          width 184px
-          height @width
-          border-radius 50%
-          overflow hidden
-          background url('http://s3.music.126.net/mobile-new/img/disc_default.png?7c9b3ad%E2%80%A6=') no-repeat
-          background-size cover
-          position absolute
-          left 50%
-          top 50%
-          transform translate3d(-50%, -50%, 0)
-
-          img
-            width 100%
-            border-radius 50%
-
-      .play-btn
-        $svgWidth = 35px
-        outline none
-        border 1px solid #fff
-        position absolute
-        z-index 5
-        top 50%
-        left 50%
-        transform translate3d(-50%, -50%, 0)
-        background-color rgba(113, 126, 137, 0.9)
-        border-radius 50%
-        vertical-align top
-        padding (10px / 40) * $svgWidth
-
-        &.hidden
-          display none
-
-        svg
-          width $svgWidth
-          height $svgWidth
-          vertical-align top
-    
-    .lyric-wrapper
-      box-sizing border-box
-      // overflow hidden
-      padding 10px 20px
-      text-align center
-      h1
-        font-size 20px
-        color #dfe0e0
-      .lyric-move-wrap
-        font-size 16px
+      &::after
+        content ''
+        display block
         width 100%
-        height 7.2em
-        overflow hidden
-        -webkit-mask-image linear-gradient(#000,#000 90%,rgba(0,0,0,0) 100%)
-        .lyric-move
-          transition all 0.3s linear
-          .active
-            color #dfe0e0
-          p
-            color #858588
-            line-height 2
-            height 2em
-            &:empty
-              height 0.5em
+        height 100%
+        background-color rgba(0, 0, 0, 0.5)
 
-        
+  .logo
+    svg
+      margin 12px 0 0 10px
+      width 92px
+      height 17px
+
+  .rotate
+    animation rollDesc 15s infinite linear
+
+  @keyframes rollDesc
+    0%
+      transform rotate(0deg)
+
+    100%
+      transform rotate(360deg)
+
+  .song-disc
+    position relative
+
+    .needle
+      position fixed
+      z-index 9
+      height 137px
+      width 96px
+      top 0
+      left 50%
+      margin-left @width * -0.5 + 25
+      background-image url('//s3.music.126.net/mobile-new/img/needle-ip6.png?be4ebbeb6befadfcae75ce174e7db862=')
+      background-size contain
+      transition all 0.5s linear
+      transform-origin left top
+
+      &.pause
+        transform rotate(-18deg)
+
+    .roll-wrap
+      position relative
+      width 296px
+      height @width
+      margin 35px auto 0px
+
+      &::before
+        content ''
+        position absolute
+        top 0
+        bottom 0
+        left 0
+        right 0
+        background url('http://s3.music.126.net/mobile-new/img/disc.png?d3bdd1080a72129346aa0b4b4964b75f=') no-repeat
+        background-size cover
+
+      .light
+        background-image url('https://s3.music.126.net/mobile-new/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577=')
+        position absolute
+        top 0
+        bottom 0
+        left 0
+        right 0
+        background-size cover
+
+      .song-image
+        width 184px
+        height @width
+        border-radius 50%
+        overflow hidden
+        background url('http://s3.music.126.net/mobile-new/img/disc_default.png?7c9b3ad%E2%80%A6=') no-repeat
+        background-size cover
+        position absolute
+        left 50%
+        top 50%
+        transform translate3d(-50%, -50%, 0)
+
+        img
+          width 100%
+          border-radius 50%
+
+    .play-btn
+      $svgWidth = 35px
+      outline none
+      border 1px solid #fff
+      position absolute
+      z-index 5
+      top 50%
+      left 50%
+      transform translate3d(-50%, -50%, 0)
+      background-color rgba(113, 126, 137, 0.9)
+      border-radius 50%
+      vertical-align top
+      padding (10px / 40) * $svgWidth
+
+      &.hidden
+        display none
+
+      svg
+        width $svgWidth
+        height $svgWidth
+        vertical-align top
+
+  .lyric-wrapper
+    box-sizing border-box
+    // overflow hidden
+    padding 10px 20px
+    text-align center
+
+    h1
+      font-size 20px
+      color #dfe0e0
+
+    .lyric-move-wrap
+      font-size 16px
+      width 100%
+      height 7.2em
+      overflow hidden
+      -webkit-mask-image linear-gradient(#000, #000 90%, rgba(0, 0, 0, 0) 100%)
+
+      .lyric-move
+        transition all 0.3s linear
+
+        .active
+          color #dfe0e0
+
+        p
+          color #858588
+          line-height 2
+          height 2em
+
+          &:empty
+            height 0.5em
