@@ -133,6 +133,7 @@ body .tab-content .page-1 section.recommendSong ul li {
   box-sizing: border-box;
   vertical-align: top;
   margin-bottom: 16px;
+  cursor: pointer;
 }
 body .tab-content .page-1 section.recommendSong ul li img {
   vertical-align: top;
@@ -165,6 +166,7 @@ body .tab-content .page-1 .latest-song ul li {
   text-align: left;
   display: flex;
   border-bottom: 1px solid rgba(214,214,200,0.4);
+  cursor: pointer;
 }
 body .tab-content .page-1 .latest-song ul .left {
   flex: 1;
@@ -252,6 +254,7 @@ body .tab-content .page-2.active .banner p {
 }
 body .tab-content .page-2.active .hotSong li {
   display: flex;
+  cursor: pointer;
 }
 body .tab-content .page-2.active .hotSong .left {
   font-size: 16px;
